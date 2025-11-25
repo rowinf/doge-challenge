@@ -4,82 +4,90 @@ import { Database } from "bun:sqlite";
 const app = new Hono();
 const db = new Database("ecfr.sqlite");
 
-app.get("/api/agencies", (c) => {
-  const query = db.query("SELECT * FROM agencies ORDER BY latest_word_count DESC");
-  return c.json(query.all());
-});
-
-app.get("/api/agencies/:slug/history", (c) => {
-  const slug = c.req.param("slug");
-  const query = db.query("SELECT * FROM snapshots WHERE agency_slug = ? ORDER BY check_date DESC");
-  return c.json(query.all(slug));
-});
-
+// --- 1. CORE LOGIC: Calculate Velocity & Stats ---
 function getAgencyStats(slug: string) {
-  // 1. JOIN Agencies -> References -> Snapshots
-  const rows = db.query(`
+  // JOIN: Agencies -> References -> Snapshots
+  // We sum up the word counts of all Titles associated with this agency for each distinct date.
+  const query = db.query(`
     SELECT s.snapshot_date, SUM(s.word_count) as total_words
     FROM agency_references ar
     JOIN snapshots s ON s.title = ar.title_number
     WHERE ar.agency_slug = $slug
     GROUP BY s.snapshot_date
     ORDER BY s.snapshot_date DESC
-  `).all({ $slug: slug });
+  `);
 
-  if (rows.length < 2) return { velocity: 0, history: rows };
+  const history = query.all({ $slug: slug }) as { snapshot_date: string, total_words: number }[];
 
-  const newest = rows[0] as any;
-  const oldest = rows[rows.length - 1] as any;
+  // Defaults
+  let velocity = 0;
+  let latest_count = 0;
 
-  // 2. Calculate Years Elapsed
-  const msDiff = new Date(newest.snapshot_date).getTime() - new Date(oldest.snapshot_date).getTime();
-  const years = msDiff / (1000 * 60 * 60 * 24 * 365.25);
+  if (history.length > 0) {
+    latest_count = history[0].total_words;
 
-  // 3. Velocity = Change / Years
-  const diff = newest.total_words - oldest.total_words;
-  const velocity = years > 0 ? Math.round(diff / years) : 0;
+    if (history.length >= 2) {
+      const newest = history[0];
+      const oldest = history[history.length - 1];
 
-  return { 
-    velocity, 
-    latest_count: newest.total_words,
-    history: rows 
-  };
+      // Calculate time difference in years
+      const msDiff = new Date(newest.snapshot_date).getTime() - new Date(oldest.snapshot_date).getTime();
+      const years = Math.ceil(msDiff / (1000 * 60 * 60 * 24 * 365.25));
+
+      // Velocity = (New Words - Old Words) / Years
+      const diff = newest.total_words - oldest.total_words;
+      // Avoid divide by zero if dates are identical
+      velocity = years > 0.01 ? Math.round(diff / years) : 0;
+    }
+  }
+
+  return { velocity, latest_count, history };
 }
 
-const Layout = ({ children }) => (
-  <html>
+// --- 2. API ENDPOINTS (Meeting the requirement) ---
+
+app.get("/api/agencies", (c) => {
+  const agencies = db.query("SELECT * FROM agencies").all() as any[];
+  const data = agencies.map(a => ({
+    ...a,
+    stats: getAgencyStats(a.slug)
+  }));
+  return c.json(data);
+});
+
+// --- 3. UI DASHBOARD (The DOGE View) ---
+
+const Layout = ({ children }: any) => (
+  <html lang="en">
     <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>DOGE: RegTracker</title>
       <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
       <style>{`
-        :root { --primary: #ff9900; } /* Doge Orange */
-        .stat-card { padding: 20px; background: #1a1a1a; margin-bottom: 20px; border-radius: 8px; }
-        .diff-changed { color: red; }
-        .diff-clean { color: green; }
-        .word-count-vis {
-          background: #222; 
-          padding: 10px; 
-          font-family: monospace;
-          * {
-            white-space: nowrap;
-            display: grid;
-            grid-template-columns: 8rem 1fr 5rem;
-            align-items:baseline;
-            gap:1rem;
-          }
-          .bar {
-            background: var(--primary);
-            height: 10px;
-          }
-        }
+        :root { --primary: #ff9900; --background: #000; --text: #eee; }
+        body { background-color: #111; color: #eee; }
+        nav strong { color: var(--primary); font-size: 1.2rem; }
+        table { --border-color: #333; }
+        
+        /* Velocity Colors */
+        .vel-bad { color: #ff4444; font-weight: bold; }   /* Increasing Regs */
+        .vel-good { color: #00cc00; font-weight: bold; }  /* Decreasing Regs */
+        .vel-neutral { color: #666; }
+        
+        /* Sparkline Bar */
+        .spark-container { display: flex; align-items: flex-end; gap: 3px; height: 40px; }
+        .spark-bar { width: 8px; border-radius: 2px 2px 0 0; transition: height 0.3s; }
       `}</style>
     </head>
     <body>
       <main class="container">
         <nav>
           <ul><li><strong>🏛️ Dept. of Gov Efficiency</strong></li></ul>
-          <ul><li><a href="/">Dashboard</a></li><li><a href="/api/agencies">Raw API</a></li></ul>
+          <ul>
+            <li><a href="/api/agencies" class="secondary">JSON API</a></li>
+          </ul>
         </nav>
         {children}
       </main>
@@ -88,16 +96,21 @@ const Layout = ({ children }) => (
 );
 
 app.get("/", (c) => {
-  const agencies = db.query("SELECT * FROM agencies ORDER BY latest_word_count DESC").all();
-  const data = agencies.map((a: any) => {
-    const stats = getAgencyStats(a.slug);
-    return { ...a, ...stats };
-  }).sort((a, b) => b.velocity - a.velocity); // Sort by highest velocity (Worst offenders first)
+  // Fetch agencies and calculate stats for each
+  const agencies = db.query("SELECT * FROM agencies").all() as any[];
+
+  const analyzedData = agencies.map(a => {
+    return { ...a, ...getAgencyStats(a.slug) };
+  });
+
+  // Sort by Velocity (Highest Growth First = Worst Offenders)
+  analyzedData.sort((a, b) => b.velocity - a.velocity);
+
   return c.html(
     <Layout>
       <hgroup>
         <h2>Regulatory Burden Index</h2>
-        <h3>Tracking word count and integrity of federal regulations.</h3>
+        <h3>Tracking the velocity of federal code expansion.</h3>
       </hgroup>
 
       <figure>
@@ -105,91 +118,66 @@ app.get("/", (c) => {
           <thead>
             <tr>
               <th>Agency</th>
-              <th>Word Count</th>
-              <th>Stats</th>
-              <th>Action</th>
+              <th>Total Words (Current)</th>
+              <th>Velocity (Words/Yr)</th>
+              <th>Trend (Last 2 Years)</th>
             </tr>
           </thead>
           <tbody>
-            {data.map((a: any) => (
-              <tr>
-                <td>{a.short_name}</td>
-                <td>{a.latest_count.toLocaleString()}</td>
-                <td>
-                  <div style="display: flex; align-items: flex-end; height: 30px; gap: 2px;">
-                      {a.history.slice(0, 5).reverse().map((h: any) => {
-                        const height = Math.max(5, (h.total_words / a.latest_count) * 100 * 0.3); // Scale down
-                        return <div style={`width:6px; height:${height}px; background:${a.velocity > 0 ? 'red' : 'green'}; opacity: 0.6;`}></div>
+            {analyzedData.map((row: any) => {
+              // Determine Color
+              let vClass = "vel-neutral";
+              if (row.velocity > 100) vClass = "vel-bad";
+              if (row.velocity < -100) vClass = "vel-good";
+
+              const prefix = row.velocity > 0 ? "+" : "";
+
+              // Sparkline Math: Find max value in history to normalize bar height
+              const maxVal = Math.max(...row.history.map((h: any) => h.total_words));
+
+              return (
+                <tr>
+                  <td>
+                    <strong>{row.short_name}</strong><br />
+                    <small style="color:#666">{row.name}</small>
+                  </td>
+                  <td>{row.latest_count.toLocaleString()}</td>
+                  <td class={vClass}>
+                    {prefix}{row.velocity.toLocaleString()}
+                  </td>
+                  <td>
+                    <div class="spark-container">
+                      {/* Reverse history so oldest is on left */}
+                      {[...row.history].reverse().map((h: any) => {
+                        // Calculate height percentage (min 10% so it's visible)
+                        const pct = (h.total_words / maxVal) * 100;
+                        // Color based on comparison to previous year could be cool, but keep simple
+                        return (
+                          <div
+                            class="spark-bar"
+                            style={`height:${pct}%; background-color: ${row.velocity > 0 ? '#ff4444' : '#00cc00'}; opacity: 0.7;`}
+                            data-tooltip={`${h.snapshot_date}: ${h.total_words.toLocaleString()}`}
+                          ></div>
+                        )
                       })}
-                  </div>
-                </td>
-                <td>
-                  <button
-                    class="outline"
-                    hx-get={`/agency/${a.slug}`}
-                    hx-target="#detail-view"
-                  >
-                    Analyze
-                  </button>
-                </td>
-              </tr>
-            ))}
+                    </div>
+                    <small style="font-size:0.6rem; color:#555">
+                      {row.history.length > 0 ? row.history[row.history.length - 1].snapshot_date : ''}
+                      →
+                      {row.history.length > 0 ? row.history[0].snapshot_date : ''}
+                    </small>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </figure>
 
-      <div id="detail-view"></div>
+      <footer>
+        <small>Generated by DOGE Engine v1.0 • Running on Bun/Hono/SQLite</small>
+      </footer>
     </Layout>
-  );
-});
-
-app.get("/agency/:slug", (c) => {
-  const slug = c.req.param("slug");
-  const agency = db.query("SELECT * FROM agencies WHERE slug = ?").get(slug) as any;
-  const history = db.query(
-    `SELECT ar.title_number, s.word_count, snapshot_date
-    FROM agency_references ar
-    JOIN snapshots s ON s.title = ar.title_number
-    WHERE ar.agency_slug = ?
-    GROUP BY ar.title_number, snapshot_date;`
-  ).all(slug);
-
-  const maxCount = Math.max(...history.map((h: any) => h.word_count));
-
-  return c.html(
-    <article>
-      <header>
-        <strong>Analysis: {agency.name}</strong>
-
-      </header>
-      <div class="grid">
-        <div class="stat-card">
-          <h4>Latest Word Count</h4>
-          <h2>{agency.latest_word_count.toLocaleString()}</h2>
-        </div>
-        <div class="stat-card">
-          <h4>Last Updated</h4>
-          <h2>{agency.last_updated_date}</h2>
-        </div>
-      </div>
-
-      <h5>Historical Growth</h5>
-      <div class="word-count-vis">
-        <div>
-          <span>title/date</span><span>Graph</span><span># Words</span>
-        </div>
-        {history.map((h: any) => {
-          const width = Math.floor((h.word_count / maxCount) * 100);
-          return (
-            <div>
-              <span>{h.title_number}/{h.snapshot_date}</span>
-              <div class="bar" style={`width: ${width}%`}></div>
-              <span>{h.word_count}</span>
-            </div>
-          )
-        })}
-      </div>
-    </article>
   );
 });
 
