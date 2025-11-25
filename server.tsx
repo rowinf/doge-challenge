@@ -15,6 +15,37 @@ app.get("/api/agencies/:slug/history", (c) => {
   return c.json(query.all(slug));
 });
 
+function getAgencyStats(slug: string) {
+  // 1. JOIN Agencies -> References -> Snapshots
+  const rows = db.query(`
+    SELECT s.snapshot_date, SUM(s.word_count) as total_words
+    FROM agency_references ar
+    JOIN snapshots s ON s.title = ar.title_number
+    WHERE ar.agency_slug = $slug
+    GROUP BY s.snapshot_date
+    ORDER BY s.snapshot_date DESC
+  `).all({ $slug: slug });
+
+  if (rows.length < 2) return { velocity: 0, history: rows };
+
+  const newest = rows[0] as any;
+  const oldest = rows[rows.length - 1] as any;
+
+  // 2. Calculate Years Elapsed
+  const msDiff = new Date(newest.snapshot_date).getTime() - new Date(oldest.snapshot_date).getTime();
+  const years = msDiff / (1000 * 60 * 60 * 24 * 365.25);
+
+  // 3. Velocity = Change / Years
+  const diff = newest.total_words - oldest.total_words;
+  const velocity = years > 0 ? Math.round(diff / years) : 0;
+
+  return { 
+    velocity, 
+    latest_count: newest.total_words,
+    history: rows 
+  };
+}
+
 const Layout = ({ children }) => (
   <html>
     <head>
@@ -33,7 +64,7 @@ const Layout = ({ children }) => (
           * {
             white-space: nowrap;
             display: grid;
-            grid-template-columns:6rem 1fr 5rem;
+            grid-template-columns: 8rem 1fr 5rem;
             align-items:baseline;
             gap:1rem;
           }
@@ -58,7 +89,10 @@ const Layout = ({ children }) => (
 
 app.get("/", (c) => {
   const agencies = db.query("SELECT * FROM agencies ORDER BY latest_word_count DESC").all();
-
+  const data = agencies.map((a: any) => {
+    const stats = getAgencyStats(a.slug);
+    return { ...a, ...stats };
+  }).sort((a, b) => b.velocity - a.velocity); // Sort by highest velocity (Worst offenders first)
   return c.html(
     <Layout>
       <hgroup>
@@ -72,16 +106,23 @@ app.get("/", (c) => {
             <tr>
               <th>Agency</th>
               <th>Word Count</th>
-              <th>Integrity Check (SHA256)</th>
+              <th>Stats</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {agencies.map((a: any) => (
+            {data.map((a: any) => (
               <tr>
                 <td>{a.short_name}</td>
-                <td>{a.latest_word_count}</td>
-                <td><small>{a.latest_checksum}</small></td>
+                <td>{a.latest_count.toLocaleString()}</td>
+                <td>
+                  <div style="display: flex; align-items: flex-end; height: 30px; gap: 2px;">
+                      {a.history.slice(0, 5).reverse().map((h: any) => {
+                        const height = Math.max(5, (h.total_words / a.latest_count) * 100 * 0.3); // Scale down
+                        return <div style={`width:6px; height:${height}px; background:${a.velocity > 0 ? 'red' : 'green'}; opacity: 0.6;`}></div>
+                      })}
+                  </div>
+                </td>
                 <td>
                   <button
                     class="outline"
@@ -106,10 +147,11 @@ app.get("/agency/:slug", (c) => {
   const slug = c.req.param("slug");
   const agency = db.query("SELECT * FROM agencies WHERE slug = ?").get(slug) as any;
   const history = db.query(
-    `SELECT word_count, snapshot_date
+    `SELECT ar.title_number, s.word_count, snapshot_date
     FROM agency_references ar
-    JOIN snapshots s ON s.title_number = ar.title_number
-    WHERE ar.agency_slug = ?;`
+    JOIN snapshots s ON s.title = ar.title_number
+    WHERE ar.agency_slug = ?
+    GROUP BY ar.title_number, snapshot_date;`
   ).all(slug);
 
   const maxCount = Math.max(...history.map((h: any) => h.word_count));
@@ -133,11 +175,14 @@ app.get("/agency/:slug", (c) => {
 
       <h5>Historical Growth</h5>
       <div class="word-count-vis">
+        <div>
+          <span>title/date</span><span>Graph</span><span># Words</span>
+        </div>
         {history.map((h: any) => {
           const width = Math.floor((h.word_count / maxCount) * 100);
           return (
             <div>
-              <span>{h.snapshot_date}</span>
+              <span>{h.title_number}/{h.snapshot_date}</span>
               <div class="bar" style={`width: ${width}%`}></div>
               <span>{h.word_count}</span>
             </div>

@@ -67,7 +67,9 @@ async function runSync() {
     const agencies = (data.agencies || [])
         .filter((a: any) => a.cfr_references && a.cfr_references.length > 0)
         .slice(3, AGENCY_LIMIT + 3);
+    // memory cache for snapshots already fetched
     const processedSnapshots = new Set<string>();
+    
     for (const agency of agencies) {
         const shortName = agency.short_name || agency.name;
         await sqlite`
@@ -93,7 +95,7 @@ async function runSync() {
                 }
                 const existing = await sqlite`
                     SELECT id FROM snapshots 
-                    WHERE title_number = ${title} AND snapshot_date = ${date}
+                    WHERE title = ${title} AND snapshot_date = ${date}
                 `.values();
 
                 if (existing.length > 0) {
@@ -124,7 +126,7 @@ async function runSync() {
                         const checksum = getChecksum(text);
 
                         await sqlite`
-                            INSERT INTO snapshots (snapshot_date, word_count, checksum, title_number)
+                            INSERT INTO snapshots (snapshot_date, word_count, checksum, title)
                             VALUES (${date}, ${wordCount}, ${checksum}, ${title})
                         `;
 
