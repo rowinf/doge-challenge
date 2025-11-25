@@ -82,9 +82,9 @@ app.get("/", (c) => {
           <thead>
             <tr>
               <th>Agency</th>
-              <th>Total Size</th>
-              <th>Velocity (Size/Yr)</th>
-              <th>Trend</th>
+              <th><span data-tooltip="Sum of agency regulatory document size" data-placement="left">Total Size</span></th>
+              <th><span data-tooltip="Average change in total document size/year" data-placement="left">Velocity</span></th>
+              <th><span data-tooltip="2 yrs ago, 1 yr ago, 60 days ago" data-placement="left">Trend</span></th>
             </tr>
           </thead>
           <tbody>
@@ -95,7 +95,7 @@ app.get("/", (c) => {
               
               return (
                 <tr>
-                  <td>{row.short_name}</td>
+                  <td><span data-tooltip={row.name} data-placement="right">{row.short_name}</span></td>
                   <td>{formatFileSize(row.current)}</td>
                   <td class={trendClass}>
                     {sign}{formatFileSize(Math.abs(row.velocity))}
