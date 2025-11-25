@@ -4,7 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run --hot server.tsx"
+    "dev": "bun run --hot server.tsx",
+    "sync": "bun run ./sync.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"

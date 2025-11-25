@@ -4,90 +4,61 @@ import { Database } from "bun:sqlite";
 const app = new Hono();
 const db = new Database("ecfr.sqlite");
 
-// --- 1. CORE LOGIC: Calculate Velocity & Stats ---
-function getAgencyStats(slug: string) {
-  // JOIN: Agencies -> References -> Snapshots
-  // We sum up the word counts of all Titles associated with this agency for each distinct date.
-  const query = db.query(`
-    SELECT s.snapshot_date, SUM(s.word_count) as total_words
+function formatFileSize(bytes: number, decimalPoint = 2) {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1000;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(decimalPoint)) + ' ' + sizes[i];
+}
+
+function getStats(slug: string) {
+  // Sum byte_size across all titles for this agency
+  const rows = db.query(`
+    SELECT s.snapshot_date, SUM(s.byte_size) as total_bytes
     FROM agency_references ar
-    JOIN snapshots s ON s.title = ar.title_number
+    JOIN snapshots s ON s.title_number = ar.title_number
     WHERE ar.agency_slug = $slug
     GROUP BY s.snapshot_date
     ORDER BY s.snapshot_date DESC
-  `);
+  `).all({ $slug: slug }) as any[];
 
-  const history = query.all({ $slug: slug }) as { snapshot_date: string, total_words: number }[];
+  if (rows.length < 2) return { velocity: 0, current: 0, history: [] };
 
-  // Defaults
-  let velocity = 0;
-  let latest_count = 0;
-
-  if (history.length > 0) {
-    latest_count = history[0].total_words;
-
-    if (history.length >= 2) {
-      const newest = history[0];
-      const oldest = history[history.length - 1];
-
-      // Calculate time difference in years
-      const msDiff = new Date(newest.snapshot_date).getTime() - new Date(oldest.snapshot_date).getTime();
-      const years = Math.ceil(msDiff / (1000 * 60 * 60 * 24 * 365.25));
-
-      // Velocity = (New Words - Old Words) / Years
-      const diff = newest.total_words - oldest.total_words;
-      // Avoid divide by zero if dates are identical
-      velocity = years > 0.01 ? Math.round(diff / years) : 0;
-    }
-  }
-
-  return { velocity, latest_count, history };
+  const newest = rows[0];
+  const oldest = rows[rows.length - 1];
+  
+  // Calculate Velocity (Sections added per year)
+  const years = (new Date(newest.snapshot_date).getTime() - new Date(oldest.snapshot_date).getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+  const diff_bytes = newest.total_bytes - oldest.total_bytes;
+  
+  // Avoid divide by zero
+  const velocity = years > 0.1 ? Math.round(diff_bytes / years) : 0;
+  return {
+    velocity: velocity,
+    current: newest.total_bytes,
+    history: rows,
+    increasing: diff_bytes == 0 ? null : diff_bytes > 0,
+  };
 }
 
-// --- 2. API ENDPOINTS (Meeting the requirement) ---
-
-app.get("/api/agencies", (c) => {
-  const agencies = db.query("SELECT * FROM agencies").all() as any[];
-  const data = agencies.map(a => ({
-    ...a,
-    stats: getAgencyStats(a.slug)
-  }));
-  return c.json(data);
-});
-
-// --- 3. UI DASHBOARD (The DOGE View) ---
-
 const Layout = ({ children }: any) => (
-  <html lang="en">
+  <html data-theme="dark">
     <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>DOGE: RegTracker</title>
-      <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+      <title>DOGE: Complexity Tracker</title>
+      <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
       <style>{`
-        :root { --primary: #ff9900; --background: #000; --text: #eee; }
-        body { background-color: #111; color: #eee; }
-        nav strong { color: var(--primary); font-size: 1.2rem; }
-        table { --border-color: #333; }
-        
-        /* Velocity Colors */
-        .vel-bad { color: #ff4444; font-weight: bold; }   /* Increasing Regs */
-        .vel-good { color: #00cc00; font-weight: bold; }  /* Decreasing Regs */
-        .vel-neutral { color: #666; }
-        
-        /* Sparkline Bar */
-        .spark-container { display: flex; align-items: flex-end; gap: 3px; height: 40px; }
+        :root { --primary: #e6b800; }
+        .trend-up { color: #ff5555; }
+        .trend-down { color: #55ff55; }
         .spark-bar { width: 8px; border-radius: 2px 2px 0 0; transition: height 0.3s; }
       `}</style>
     </head>
     <body>
       <main class="container">
         <nav>
-          <ul><li><strong>🏛️ Dept. of Gov Efficiency</strong></li></ul>
-          <ul>
-            <li><a href="/api/agencies" class="secondary">JSON API</a></li>
-          </ul>
+          <ul><li><strong>📜 Reg Complexity Index</strong></li></ul>
         </nav>
         {children}
       </main>
@@ -96,76 +67,49 @@ const Layout = ({ children }: any) => (
 );
 
 app.get("/", (c) => {
-  // Fetch agencies and calculate stats for each
   const agencies = db.query("SELECT * FROM agencies").all() as any[];
-
-  const analyzedData = agencies.map(a => {
-    return { ...a, ...getAgencyStats(a.slug) };
-  });
-
-  // Sort by Velocity (Highest Growth First = Worst Offenders)
-  analyzedData.sort((a, b) => b.velocity - a.velocity);
+  
+  const data = agencies
+    .map(a => ({ ...a, ...getStats(a.slug) }))
+    .filter(a => a.history.length > 0)
+    .sort((a, b) =>  b.velocity - a.velocity); // Most new sections first
 
   return c.html(
     <Layout>
-      <hgroup>
-        <h2>Regulatory Burden Index</h2>
-        <h3>Tracking the velocity of federal code expansion.</h3>
-      </hgroup>
-
+      <p>Tracking the <strong>number of distinct sections</strong> (individual rules) enforced by agencies.</p>
       <figure>
         <table role="grid">
           <thead>
             <tr>
               <th>Agency</th>
-              <th>Total Words (Current)</th>
-              <th>Velocity (Words/Yr)</th>
-              <th>Trend (Last 2 Years)</th>
+              <th>Total Size</th>
+              <th>Velocity (Size/Yr)</th>
+              <th>Trend</th>
             </tr>
           </thead>
           <tbody>
-            {analyzedData.map((row: any) => {
-              // Determine Color
-              let vClass = "vel-neutral";
-              if (row.velocity > 100) vClass = "vel-bad";
-              if (row.velocity < -100) vClass = "vel-good";
-
-              const prefix = row.velocity > 0 ? "+" : "";
-
-              // Sparkline Math: Find max value in history to normalize bar height
-              const maxVal = Math.max(...row.history.map((h: any) => h.total_words));
-
+            {data.map((row: any) => {
+              const trendClass = row.increasing ? "trend-up" : (row.increasing === false ? "trend-down" : "");
+              const sign = row.increasing > 0 ? "+" : "";
+              const maxVal = Math.max(...row.history.map((h:any) => h.total_bytes));
+              
               return (
                 <tr>
-                  <td>
-                    <strong>{row.short_name}</strong><br />
-                    <small style="color:#666">{row.name}</small>
-                  </td>
-                  <td>{row.latest_count.toLocaleString()}</td>
-                  <td class={vClass}>
-                    {prefix}{row.velocity.toLocaleString()}
+                  <td>{row.short_name}</td>
+                  <td>{formatFileSize(row.current)}</td>
+                  <td class={trendClass}>
+                    {sign}{formatFileSize(Math.abs(row.velocity))}
                   </td>
                   <td>
-                    <div class="spark-container">
-                      {/* Reverse history so oldest is on left */}
-                      {[...row.history].reverse().map((h: any) => {
-                        // Calculate height percentage (min 10% so it's visible)
-                        const pct = (h.total_words / maxVal) * 100;
-                        // Color based on comparison to previous year could be cool, but keep simple
-                        return (
-                          <div
-                            class="spark-bar"
-                            style={`height:${pct}%; background-color: ${row.velocity > 0 ? '#ff4444' : '#00cc00'}; opacity: 0.7;`}
-                            data-tooltip={`${h.snapshot_date}: ${h.total_words.toLocaleString()}`}
-                          ></div>
-                        )
-                      })}
+                    <div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;">
+                      {[...row.history].reverse().map((h: any) => (
+                        <div class="spark-bar" data-tooltip={formatFileSize(h.total_bytes)} style={`
+                          height: ${(h.total_bytes / maxVal) * 100}%;
+                          background-color: ${row.velocity > 0 ? '#ff5555' : '#55ff55'};
+                          opacity: 0.8;
+                        `} title={`${h.snapshot_date}: ${h.total_bytes}`}></div>
+                      ))}
                     </div>
-                    <small style="font-size:0.6rem; color:#555">
-                      {row.history.length > 0 ? row.history[row.history.length - 1].snapshot_date : ''}
-                      →
-                      {row.history.length > 0 ? row.history[0].snapshot_date : ''}
-                    </small>
                   </td>
                 </tr>
               )
@@ -173,10 +117,6 @@ app.get("/", (c) => {
           </tbody>
         </table>
       </figure>
-
-      <footer>
-        <small>Generated by DOGE Engine v1.0 • Running on Bun/Hono/SQLite</small>
-      </footer>
     </Layout>
   );
 });
