@@ -30,6 +30,22 @@ const Layout = ({ children }) => (
         .stat-card { padding: 20px; background: #1a1a1a; margin-bottom: 20px; border-radius: 8px; }
         .diff-changed { color: red; }
         .diff-clean { color: green; }
+        .word-count-vis {
+          background: #222; 
+          padding: 10px; 
+          font-family: monospace;
+          * {
+            white-space: nowrap; 
+            display: grid;
+            grid-template-columns:6rem 1fr 5rem;
+            align-items:baseline;
+            gap:1rem;
+          }
+          .bar {
+            background: var(--primary);
+            height: 10px;
+          }
+        }
       `}</style>
     </head>
     <body>
@@ -45,7 +61,7 @@ const Layout = ({ children }) => (
 );
 
 app.get("/", (c) => {
-  const agencies = db.query("SELECT * FROM agencies ORDER BY current_word_count DESC").all();
+  const agencies = db.query("SELECT * FROM agencies ORDER BY latest_word_count DESC").all();
   
   return c.html(
     <Layout>
@@ -68,8 +84,8 @@ app.get("/", (c) => {
             {agencies.map((a: any) => (
               <tr>
                 <td>{a.short_name}</td>
-                <td>{a.current_word_count.toLocaleString()}</td>
-                <td><small>{a.current_checksum}</small></td>
+                <td>{a.latest_word_count}</td>
+                <td><small>{a.latest_checksum}</small></td>
                 <td>
                   <button 
                     class="outline"
@@ -95,35 +111,34 @@ app.get("/agency/:slug", (c) => {
   const agency = db.query("SELECT * FROM agencies WHERE slug = ?").get(slug) as any;
   const history = db.query("SELECT * FROM snapshots WHERE agency_slug = ? ORDER BY check_date ASC").all(slug);
 
-  // Simple ASCII chart logic for "UI" visualization without heavy JS libs
   const maxCount = Math.max(...history.map((h: any) => h.word_count));
   
   return c.html(
     <article>
       <header>
         <strong>Analysis: {agency.name}</strong>
-        <span style="float:right">Last Updated: {agency.last_updated}</span>
+        
       </header>
       <div class="grid">
         <div class="stat-card">
-          <h4>Total Words</h4>
-          <h2>{agency.current_word_count.toLocaleString()}</h2>
+          <h4>Latest Word Count</h4>
+          <h2>{agency.latest_word_count.toLocaleString()}</h2>
         </div>
         <div class="stat-card">
-          <h4>Integrity Status</h4>
-          <h2 class="diff-clean">VERIFIED</h2>
+          <h4>Last Updated</h4>
+          <h2>{agency.last_updated_date}</h2>
         </div>
       </div>
 
       <h5>Historical Growth</h5>
-      <div style="background: #222; padding: 10px; font-family: monospace;">
+      <div class="word-count-vis">
         {history.map((h: any) => {
           const width = Math.floor((h.word_count / maxCount) * 100);
           return (
-            <div style="margin-bottom: 5px; white-space: nowrap;">
-              <span style="display:inline-block; width: 100px;">{h.check_date}</span>
-              <div style={`display:inline-block; background: var(--primary); width: ${width}%; height: 10px;`}></div>
-              <span style="margin-left: 10px;">{h.word_count}</span>
+            <div>
+              <span>{h.check_date}</span>
+              <div class="bar" style={`width: ${width}%`}></div>
+              <span>{h.word_count}</span>
             </div>
           )
         })}

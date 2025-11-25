@@ -1,96 +1,131 @@
+import { SQL } from "bun";
 import { Database } from "bun:sqlite";
 import { createHash } from "crypto";
 
-const db = new Database("ecfr.sqlite");
+const sqlite = new SQL("sqlite://ecfr.sqlite");
+// --- Configuration ---
+// For the demo, we only look at the top 5 agencies to save time.
+const AGENCY_LIMIT = 5;
+// We check today and the same date for the last 2 years
+const SNAPSHOT_DATES = [
+    //   new Date().toISOString().split('T')[0], // Today
+    new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().split('T')[0], // 1 year ago
+    new Date(new Date().setFullYear(new Date().getFullYear() - 2)).toISOString().split('T')[0], // 2 years ago
+    new Date(new Date().setFullYear(new Date().getFullYear() - 3)).toISOString().split('T')[0], // 3 years ago
+];
 
-// 1. Initialize Schema
-db.run(`
+// --- 1. Database Schema ---
+await sqlite`
   CREATE TABLE IF NOT EXISTS agencies (
     slug TEXT PRIMARY KEY,
     name TEXT,
     short_name TEXT,
-    current_word_count INTEGER,
-    current_checksum TEXT,
-    last_updated DATETIME
+    latest_word_count INTEGER,
+    latest_checksum TEXT,
+    primary_title INTEGER,
+    last_updated_date DATE 
   );
-`);
+`;
 
-db.run(`
+await sqlite`
   CREATE TABLE IF NOT EXISTS snapshots (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     agency_slug TEXT,
     check_date DATE,
     word_count INTEGER,
     checksum TEXT,
-    FOREIGN KEY(agency_slug) REFERENCES agencies(slug)
+    UNIQUE(agency_slug, check_date)
   );
-`);
+`;
 
-// 2. Helper Functions
+// --- 2. Helpers ---
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 function cleanText(xml: string): string {
-  // Brutal regex strip for demo speed - in prod use a real XML parser
-  return xml.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    // Strips tags to get raw regulatory text
+    return xml.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 }
 
 function getChecksum(text: string): string {
-  return createHash("sha256").update(text).digest("hex").substring(0, 12);
+    return createHash("sha256").update(text).digest("hex").substring(0, 12);
 }
 
-// 3. The Sync Job
+// --- 3. Main Sync Logic ---
 async function runSync() {
-  console.log("🚀 Starting eCFR Sync...");
-  
-  // A. Fetch Agency List
-  const response = await fetch("https://www.ecfr.gov/api/admin/v1/agencies.json");
-  const data = await response.json();
-  const agencies = (data.agencies || []).slice(0, 5); // Limit to 5 for demo speed
+    console.log(`🏛️  Starting Historical Sync for ${SNAPSHOT_DATES.length} time points...`);
+    const todaysDate = new Date().toISOString().split('T')[0];
 
-  const upsertAgency = db.prepare(`
-    INSERT INTO agencies (slug, name, short_name, current_word_count, current_checksum, last_updated)
-    VALUES ($slug, $name, $short, $count, $sum, CURRENT_TIMESTAMP)
-    ON CONFLICT(slug) DO UPDATE SET
-      current_word_count = $count,
-      current_checksum = $sum,
-      last_updated = CURRENT_TIMESTAMP
-  `);
+    // A. Get Agency List
+    const resp = await fetch("https://www.ecfr.gov/api/admin/v1/agencies.json");
+    const data = await resp.json();
 
-  const insertSnapshot = db.prepare(`
-    INSERT INTO snapshots (agency_slug, check_date, word_count, checksum)
-    VALUES ($slug, DATE('now'), $count, $sum)
-  `);
+    // Filter: Only agencies that actually have a Title reference
+    const agencies = (data.agencies || [])
+        .filter((a: any) => a.cfr_references && a.cfr_references.length > 0)
+        .slice(0, AGENCY_LIMIT);
 
-  for (const agency of agencies) {
-    console.log(`Processing: ${agency.name}...`);
-    
-    // B. Fetch Content (Mocking the "Title" fetch for simplicity)
-    // In reality, you'd loop through agency.references to get specific Titles
-    // We will simulate fetching a large XML body for this agency
-    const mockRes = await fetch(`https://www.ecfr.gov/api/versioner/v1/full/2024-11-20/title-1.xml?agency=${agency.slug}`);
-    // Fallback if that specific endpoint fails in this demo context:
-    const rawXml = mockRes.ok ? await mockRes.text() : `<xml>Regulatory text for ${agency.name}...</xml>`; 
+    // C. The Loop
+    for (const agency of agencies) {
+        const title = agency.cfr_references[0].title; // Grab their primary Title
+        const shortName = agency.short_name || agency.name;
+        console.log(`\nProcessing: ${agency.short_name || agency.name} (Title ${title})`);
+        await sqlite`
+            INSERT INTO agencies (slug, name, short_name)
+            VALUES (${agency.slug}, ${agency.name}, ${shortName})
+            ON CONFLICT(slug) DO UPDATE SET name = ${agency.name}
+        `;
 
-    // C. Process
-    const text = cleanText(rawXml);
-    const wordCount = text.split(" ").length;
-    const checksum = getChecksum(text);
+        // Iterate through history (Today -> Past)
+        for (const date of SNAPSHOT_DATES) {
+            process.stdout.write(`  -> Fetching ${date}... `);
 
-    // D. Write to DB
-    upsertAgency.run({
-      $slug: agency.slug,
-      $name: agency.name,
-      $short: agency.short_name || agency.name,
-      $count: wordCount,
-      $sum: checksum
-    });
+            try {
+                // REAL API CALL: Fetch full XML for this Title on this Date
+                const url = `https://www.ecfr.gov/api/versioner/v1/full/${date}/title-${title}.xml`;
+                const res = await fetch(url);
 
-    insertSnapshot.run({
-      $slug: agency.slug,
-      $count: wordCount,
-      $sum: checksum
-    });
-  }
-  console.log("✅ Sync Complete.");
+                if (!res.ok) {
+                    console.log(`❌ (Status ${res.status})`);
+                    continue;
+                }
+
+                const xml = await res.text();
+
+                // "Analyze" the data
+                const text = cleanText(xml);
+                const wordCount = text.split(" ").length;
+                const checksum = getChecksum(text);
+
+                // Save Snapshot
+                await sqlite`
+                    INSERT INTO snapshots (agency_slug, check_date, word_count, checksum)
+                    VALUES (${agency.slug}, ${date}, ${wordCount}, ${checksum})
+                    ON CONFLICT(agency_slug, check_date) DO NOTHING
+                `;
+
+                console.log(`✅ Words: ${wordCount.toLocaleString()}`);
+
+                // Update "Latest" cache if this is today's date
+                if (date === SNAPSHOT_DATES[0]) {
+                    await sqlite`
+                        UPDATE agencies 
+                            SET latest_word_count = ${wordCount}, 
+                            latest_checksum = ${checksum},
+                            last_updated_date = ${todaysDate}
+                        WHERE slug = ${agency.slug}
+                    `;
+                }
+
+            } catch (err) {
+                console.log(`⚠️ Error: ${err}`);
+            }
+
+            // Be polite to the API
+            await sleep(1000);
+        }
+    }
+
+    console.log("\n🚀 Sync Complete.");
 }
 
-// Run if called directly
-if (import.meta.main) runSync();
+runSync();
