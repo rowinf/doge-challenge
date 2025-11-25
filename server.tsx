@@ -4,8 +4,6 @@ import { Database } from "bun:sqlite";
 const app = new Hono();
 const db = new Database("ecfr.sqlite");
 
-// --- 1. THE API (Delivering to the letter) ---
-
 app.get("/api/agencies", (c) => {
   const query = db.query("SELECT * FROM agencies ORDER BY current_word_count DESC");
   return c.json(query.all());
@@ -16,8 +14,6 @@ app.get("/api/agencies/:slug/history", (c) => {
   const query = db.query("SELECT * FROM snapshots WHERE agency_slug = ? ORDER BY check_date DESC");
   return c.json(query.all(slug));
 });
-
-// --- 2. THE UI (Delivering with efficiency) ---
 
 const Layout = ({ children }) => (
   <html>
@@ -35,7 +31,7 @@ const Layout = ({ children }) => (
           padding: 10px; 
           font-family: monospace;
           * {
-            white-space: nowrap; 
+            white-space: nowrap;
             display: grid;
             grid-template-columns:6rem 1fr 5rem;
             align-items:baseline;
@@ -62,7 +58,7 @@ const Layout = ({ children }) => (
 
 app.get("/", (c) => {
   const agencies = db.query("SELECT * FROM agencies ORDER BY latest_word_count DESC").all();
-  
+
   return c.html(
     <Layout>
       <hgroup>
@@ -87,9 +83,9 @@ app.get("/", (c) => {
                 <td>{a.latest_word_count}</td>
                 <td><small>{a.latest_checksum}</small></td>
                 <td>
-                  <button 
+                  <button
                     class="outline"
-                    hx-get={`/agency/${a.slug}`} 
+                    hx-get={`/agency/${a.slug}`}
                     hx-target="#detail-view"
                   >
                     Analyze
@@ -100,7 +96,7 @@ app.get("/", (c) => {
           </tbody>
         </table>
       </figure>
-      
+
       <div id="detail-view"></div>
     </Layout>
   );
@@ -112,12 +108,12 @@ app.get("/agency/:slug", (c) => {
   const history = db.query("SELECT * FROM snapshots WHERE agency_slug = ? ORDER BY check_date ASC").all(slug);
 
   const maxCount = Math.max(...history.map((h: any) => h.word_count));
-  
+
   return c.html(
     <article>
       <header>
         <strong>Analysis: {agency.name}</strong>
-        
+
       </header>
       <div class="grid">
         <div class="stat-card">
