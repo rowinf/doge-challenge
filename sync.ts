@@ -1,5 +1,4 @@
 import { SQL } from "bun";
-import { Database } from "bun:sqlite";
 import { createHash } from "crypto";
 
 const sqlite = new SQL("sqlite://ecfr.sqlite");
@@ -8,10 +7,10 @@ const sqlite = new SQL("sqlite://ecfr.sqlite");
 const AGENCY_LIMIT = 5;
 // We check today and the same date for the last 2 years
 const SNAPSHOT_DATES = [
-    //   new Date().toISOString().split('T')[0], // Today
+     new Date(Date.now() - 86400000 * 60).toISOString().split('T')[0], // two Months Ago
     new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().split('T')[0], // 1 year ago
     new Date(new Date().setFullYear(new Date().getFullYear() - 2)).toISOString().split('T')[0], // 2 years ago
-    new Date(new Date().setFullYear(new Date().getFullYear() - 3)).toISOString().split('T')[0], // 3 years ago
+    // new Date(new Date().setFullYear(new Date().getFullYear() - 3)).toISOString().split('T')[0], // 3 years ago
 ];
 
 // --- 1. Database Schema ---
@@ -38,14 +37,12 @@ await sqlite`
 `;
 
 await sqlite`
-    CREATE TABLE IF NOT EXISTS "cfr_references" (
-        "title"	INTEGER,
-        "chapter"	TEXT,
-        "id"	INTEGER,
-        "agency_slug"	TEXT,
-        PRIMARY KEY("id" AUTOINCREMENT),
-        CONSTRAINT "agency_slug_fk" FOREIGN KEY("agency_slug") REFERENCES "agencies"("slug"),
-        CONSTRAINT "snapshot_title_fk" FOREIGN KEY("title") REFERENCES "snapshots"("title")
+    CREATE TABLE IF NOT EXISTS agency_references (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        agency_slug TEXT,
+        title_number INTEGER,
+        chapter TEXT,
+        FOREIGN KEY(agency_slug) REFERENCES agencies(slug)
     );
 `;
 
@@ -69,51 +66,66 @@ async function runSync() {
     // Filter: Only agencies that actually have a Title reference
     const agencies = (data.agencies || [])
         .filter((a: any) => a.cfr_references && a.cfr_references.length > 0)
-        .slice(3, AGENCY_LIMIT);
-
+        .slice(3, AGENCY_LIMIT + 3);
+    const processedSnapshots = new Set<string>();
     for (const agency of agencies) {
+        const shortName = agency.short_name || agency.name;
+        await sqlite`
+            INSERT INTO agencies (slug, name, short_name)
+            VALUES (${agency.slug}, ${agency.name}, ${shortName})
+            ON CONFLICT(slug) DO UPDATE SET name = ${agency.name}
+        `;
         for (const reference of agency.cfr_references) {
             const {title, chapter} = reference;
-            const shortName = agency.short_name || agency.name;
             console.log(`\nProcessing: ${agency.short_name || agency.name} (Title ${title})`);
             await sqlite`
-                INSERT INTO agencies (slug, name, short_name)
-                VALUES (${agency.slug}, ${agency.name}, ${shortName})
-                ON CONFLICT(slug) DO UPDATE SET name = ${agency.name}
+                INSERT OR IGNORE INTO agency_references (agency_slug, title_number, chapter)
+                VALUES (${agency.slug}, ${title}, ${chapter})
             `;
 
             for (const date of SNAPSHOT_DATES) {
-                process.stdout.write(`  -> Fetching ${title} ${date}... `);
-                const existing = await sqlite`SELECT id FROM snapshots WHERE title = ${title} AND snapshot_date = ${date};`;
-                if (existing?.id != null) {
-                    console.log(`> snapshot found [id: ${existing.id}]`);
-                    break;
+                const cacheKey = `${title}-${date}`;
+
+                // 1. Check Memory Cache (Did we just download this 5 seconds ago?)
+                if (processedSnapshots.has(cacheKey)) {
+                    console.log(`   ⏭️  Skipping Title ${title} (Already processed this run)`);
+                    continue; 
                 }
+                const existing = await sqlite`
+                    SELECT id FROM snapshots 
+                    WHERE title_number = ${title} AND snapshot_date = ${date}
+                `.values();
+
+                if (existing.length > 0) {
+                    console.log(`   💾 DB Hit: Title ${title} on ${date}`);
+                    processedSnapshots.add(cacheKey);
+                    continue; 
+                }
+
+                // retry up to 3 times in case of errors
                 let tries = 0;
-                while (tries < 3) {
+                let success = false;
+                while (tries < 3 && !success) {
                     tries++;
                     try {
+                        console.log(`   ⬇️  Downloading Title ${title} (${date})... `);
                         const url = `https://www.ecfr.gov/api/versioner/v1/full/${date}/title-${title}.xml`;
                         const res = await fetch(url);
                         if (!res.ok) {
                             console.log(`❌ (Status ${res.status})`);
-                            continue;
+                            throw new Error(`(Status ${res.status})`);
                         }
 
                         const xml = await res.text();
+
                         // "Analyze" the data
                         const text = cleanText(xml);
                         const wordCount = text.split(" ").length;
                         const checksum = getChecksum(text);
 
                         await sqlite`
-                            INSERT INTO snapshots (snapshot_date, word_count, checksum, title)
+                            INSERT INTO snapshots (snapshot_date, word_count, checksum, title_number)
                             VALUES (${date}, ${wordCount}, ${checksum}, ${title})
-                        `;
-
-                        await sqlite`
-                            INSERT INTO cfr_references (title, chapter, agency_slug)
-                            VALUES (${title}, ${chapter}, ${agency.slug})
                         `;
 
                         console.log(`✅ Words: ${wordCount.toLocaleString()}`);
@@ -121,18 +133,20 @@ async function runSync() {
                         if (date === SNAPSHOT_DATES[0]) {
                             await sqlite`
                                 UPDATE agencies 
-                                    SET latest_word_count = ${wordCount}, 
+                                    SET latest_word_count = ${wordCount},
                                     latest_checksum = ${checksum},
                                     last_updated_date = ${todaysDate}
                                 WHERE slug = ${agency.slug}
                             `;
                         }
-                        break;
+                        processedSnapshots.add(cacheKey);
+                        success = true;
                     } catch (err) {
                         console.log(`⚠️ Error: ${err}`);
                         // Be polite to the API
-                        console.log(`retrying... `);
-                        await sleep(1000 * (2*tries)^2);
+                        const seconds = (3*tries)**2;
+                        console.log(`retrying after ${seconds}s`);
+                        await sleep(1000 * seconds);
                     }
                 }
 

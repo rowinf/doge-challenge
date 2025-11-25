@@ -5,7 +5,7 @@ const app = new Hono();
 const db = new Database("ecfr.sqlite");
 
 app.get("/api/agencies", (c) => {
-  const query = db.query("SELECT * FROM agencies ORDER BY current_word_count DESC");
+  const query = db.query("SELECT * FROM agencies ORDER BY latest_word_count DESC");
   return c.json(query.all());
 });
 
@@ -105,7 +105,12 @@ app.get("/", (c) => {
 app.get("/agency/:slug", (c) => {
   const slug = c.req.param("slug");
   const agency = db.query("SELECT * FROM agencies WHERE slug = ?").get(slug) as any;
-  const history = db.query("SELECT * FROM snapshots WHERE agency_slug = ? ORDER BY check_date ASC").all(slug);
+  const history = db.query(
+    `SELECT word_count, snapshot_date
+    FROM agency_references ar
+    JOIN snapshots s ON s.title_number = ar.title_number
+    WHERE ar.agency_slug = ?;`
+  ).all(slug);
 
   const maxCount = Math.max(...history.map((h: any) => h.word_count));
 
@@ -132,7 +137,7 @@ app.get("/agency/:slug", (c) => {
           const width = Math.floor((h.word_count / maxCount) * 100);
           return (
             <div>
-              <span>{h.check_date}</span>
+              <span>{h.snapshot_date}</span>
               <div class="bar" style={`width: ${width}%`}></div>
               <span>{h.word_count}</span>
             </div>
