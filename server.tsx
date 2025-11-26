@@ -48,7 +48,7 @@ const Layout = ({ children }: any) => (
     <head>
       <title>DOGE: Complexity Tracker</title>
       <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
       <style>{`
         :root { --primary: #e6b800; }
         .trend-up { color: #ff5555; }
