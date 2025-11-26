@@ -77,7 +77,7 @@ app.get("/", (c) => {
 
   return c.html(
     <Layout>
-      <p>Tracking the <strong>number of distinct sections</strong> (individual rules) enforced by agencies.</p>
+      <p>Tracking the <strong>size</strong> of rule documents enforced by agencies.</p>
       <table role="grid">
         <thead>
           <tr>
