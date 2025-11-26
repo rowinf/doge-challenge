@@ -118,6 +118,16 @@ async function runSync() {
                                         UPDATE agency_references SET chapter_byte_size = ${child.size}
                                         WHERE title_number = ${title} AND chapter = ${child.identifier} AND snapshot_date = ${date}
                                     `;
+                                } else if (child.type == 'subtitle') {
+                                    process.stdout.write(`${child.identifier}.`);
+                                    for (const ch2 of child.children) {
+                                        if (ch2.type == 'chapter') {
+                                            await sqlite`
+                                                UPDATE agency_references SET chapter_byte_size = ${child.size}
+                                                WHERE title_number = ${title} AND chapter = ${child.identifier} AND snapshot_date = ${date}
+                                            `;
+                                        }
+                                    }
                                 }
                             }
                         } else {

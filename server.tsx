@@ -15,7 +15,7 @@ function formatFileSize(bytes: number, decimalPoint = 2) {
 function getStats(slug: string) {
   // Sum byte_size across all titles for this agency
   const rows = db.query(`
-    SELECT s.snapshot_date, SUM(s.byte_size) as total_bytes
+    SELECT s.snapshot_date, SUM(s.byte_size) as total_bytes, SUM(ar.chapter_byte_size) as total_referenced_size
     FROM agency_references ar
     JOIN snapshots s ON s.title_number = ar.title_number
     WHERE ar.agency_slug = $slug
@@ -39,6 +39,7 @@ function getStats(slug: string) {
     current: newest.total_bytes,
     history: rows,
     increasing: diff_bytes == 0 ? null : diff_bytes > 0,
+    total_referenced_size: rows.reduce((tot, row) => (tot += row.total_referenced_size), 0),
   };
 }
 
