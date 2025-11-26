@@ -77,46 +77,44 @@ app.get("/", (c) => {
   return c.html(
     <Layout>
       <p>Tracking the <strong>number of distinct sections</strong> (individual rules) enforced by agencies.</p>
-      <figure>
-        <table role="grid">
-          <thead>
-            <tr>
-              <th>Agency</th>
-              <th><span data-tooltip="Sum of agency regulatory document size" data-placement="left">Total Size</span></th>
-              <th><span data-tooltip="Average change in total document size/year" data-placement="left">Velocity</span></th>
-              <th><span data-tooltip="2 yrs ago, 1 yr ago, 60 days ago" data-placement="left">Trend</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row: any) => {
-              const trendClass = row.increasing ? "trend-up" : (row.increasing === false ? "trend-down" : "");
-              const sign = row.increasing > 0 ? "+" : "";
-              const maxVal = Math.max(...row.history.map((h:any) => h.total_bytes));
-              
-              return (
-                <tr>
-                  <td><span data-tooltip={row.name} data-placement="right">{row.short_name}</span></td>
-                  <td>{formatFileSize(row.current)}</td>
-                  <td class={trendClass}>
-                    {sign}{formatFileSize(Math.abs(row.velocity))}
-                  </td>
-                  <td>
-                    <div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;">
-                      {[...row.history].reverse().map((h: any) => (
-                        <div class="spark-bar" data-tooltip={formatFileSize(h.total_bytes)} style={`
-                          height: ${(h.total_bytes / maxVal) * 100}%;
-                          background-color: ${row.velocity > 0 ? '#ff5555' : '#55ff55'};
-                          opacity: 0.8;
-                        `} title={`${h.snapshot_date}: ${h.total_bytes}`}></div>
-                      ))}
-                    </div>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </figure>
+      <table role="grid">
+        <thead>
+          <tr>
+            <th>Agency</th>
+            <th><span data-tooltip="Sum of agency regulatory document size" data-placement="left">Total Size</span></th>
+            <th><span data-tooltip="Average change in total document size/year" data-placement="left">Velocity</span></th>
+            <th><span data-tooltip="2 yrs ago, 1 yr ago, 60 days ago" data-placement="left">Trend</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row: any) => {
+            const trendClass = row.increasing ? "trend-up" : (row.increasing === false ? "trend-down" : "");
+            const sign = row.increasing > 0 ? "+" : "";
+            const maxVal = Math.max(...row.history.map((h:any) => h.total_bytes));
+            
+            return (
+              <tr>
+                <td><span data-tooltip={row.name} data-placement="right">{row.short_name}</span></td>
+                <td>{formatFileSize(row.current)}</td>
+                <td class={trendClass}>
+                  {sign}{formatFileSize(Math.abs(row.velocity))}
+                </td>
+                <td>
+                  <div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;">
+                    {[...row.history].reverse().map((h: any) => (
+                      <div class="spark-bar" data-tooltip={formatFileSize(h.total_bytes)} style={`
+                        height: ${(h.total_bytes / maxVal) * 100}%;
+                        background-color: ${row.velocity > 0 ? '#ff5555' : '#55ff55'};
+                        opacity: 0.8;
+                      `} title={`${h.snapshot_date}: ${h.total_bytes}`}></div>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </Layout>
   );
 });

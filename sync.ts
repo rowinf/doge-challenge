@@ -23,9 +23,11 @@ await sqlite`
 await sqlite`
     CREATE TABLE IF NOT EXISTS agency_references (
         agency_slug TEXT,
+        snapshot_date DATE,
         title_number INTEGER,
         chapter TEXT,
-        UNIQUE(agency_slug, title_number)
+        chapter_byte_size INTEGER,
+        UNIQUE(agency_slug, snapshot_date, title_number)
     );
 `;
 // We will store the "size" directly here
@@ -34,7 +36,7 @@ await sqlite`
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title_number INTEGER,
         snapshot_date DATE,
-        byte_size INTEGER, 
+        byte_size INTEGER,
         UNIQUE(title_number, snapshot_date)
     );
 `;
@@ -61,15 +63,16 @@ async function runSync() {
         process.stdout.write(`\n🏢 ${shortName}: `);
 
         for (const ref of agency.cfr_references) {
-            const title = ref.title;
+            const {title,chapter} = ref;
             // if (SHARED_TITLES.includes(title)) {
             //     process.stdout.write(`x`); 
             //     continue;
             // };
 
-            await sqlite`INSERT OR IGNORE INTO agency_references VALUES (${agency.slug}, ${title}, ${ref.chapter})`;
-
+            
             for (const date of SNAPSHOT_DATES) {
+                console.log(date);
+                await sqlite`INSERT OR IGNORE INTO agency_references VALUES (${agency.slug}, ${date}, ${title}, ${chapter}, 0)`;
                 const key = `${title}-${date}`;
                 if (checkedSnapshots.has(key)) {
                     process.stdout.write(`s`); 
@@ -108,6 +111,15 @@ async function runSync() {
                                 VALUES (${title}, ${date}, ${size})
                             `;
                             process.stdout.write(`.`); 
+                            for (const child of structure.children) {
+                                if (child.type == 'chapter') {
+                                    process.stdout.write(`${child.identifier}.`);
+                                    await sqlite`
+                                        UPDATE agency_references SET chapter_byte_size = ${child.size}
+                                        WHERE title_number = ${title} AND chapter = ${child.identifier} AND snapshot_date = ${date}
+                                    `;
+                                }
+                            }
                         } else {
                             process.stdout.write(`o`);
                         }
