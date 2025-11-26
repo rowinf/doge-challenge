@@ -1,0 +1,1845 @@
+
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html data-theme="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>:root{--litepicker-container-months-color-bg: #fff;--litepicker-container-months-box-shadow-color: #ddd;--litepicker-footer-color-bg: #fafafa;--litepicker-footer-box-shadow-color: #ddd;--litepicker-tooltip-color-bg: #fff;--litepicker-month-header-color: #333;--litepicker-button-prev-month-color: #9e9e9e;--litepicker-button-next-month-color: #9e9e9e;--litepicker-button-prev-month-color-hover: #2196f3;--litepicker-button-next-month-color-hover: #2196f3;--litepicker-month-width: calc(var(--litepicker-day-width) * 7);--litepicker-month-weekday-color: #9e9e9e;--litepicker-month-week-number-color: #9e9e9e;--litepicker-day-width: 38px;--litepicker-day-color: #333;--litepicker-day-color-hover: #2196f3;--litepicker-is-today-color: #f44336;--litepicker-is-in-range-color: #bbdefb;--litepicker-is-locked-color: #9e9e9e;--litepicker-is-start-color: #fff;--litepicker-is-start-color-bg: #2196f3;--litepicker-is-end-color: #fff;--litepicker-is-end-color-bg: #2196f3;--litepicker-button-cancel-color: #fff;--litepicker-button-cancel-color-bg: #9e9e9e;--litepicker-button-apply-color: #fff;--litepicker-button-apply-color-bg: #2196f3;--litepicker-button-reset-color: #909090;--litepicker-button-reset-color-hover: #2196f3;--litepicker-highlighted-day-color: #333;--litepicker-highlighted-day-color-bg: #ffeb3b}.show-week-numbers{--litepicker-month-width: calc(var(--litepicker-day-width) * 8)}.litepicker{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:0.8em;display:none}.litepicker button{border:none;background:none}.litepicker .container__main{display:-webkit-box;display:-ms-flexbox;display:flex}.litepicker .container__months{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;background-color:var(--litepicker-container-months-color-bg);border-radius:5px;-webkit-box-shadow:0 0 5px var(--litepicker-container-months-box-shadow-color);box-shadow:0 0 5px var(--litepicker-container-months-box-shadow-color);width:calc(var(--litepicker-month-width) + 10px);-webkit-box-sizing:content-box;box-sizing:content-box}.litepicker .container__months.columns-2{width:calc((var(--litepicker-month-width) * 2) + 20px)}.litepicker .container__months.columns-3{width:calc((var(--litepicker-month-width) * 3) + 30px)}.litepicker .container__months.columns-4{width:calc((var(--litepicker-month-width) * 4) + 40px)}.litepicker .container__months.split-view .month-item-header .button-previous-month,.litepicker .container__months.split-view .month-item-header .button-next-month{visibility:visible}.litepicker .container__months .month-item{padding:5px;width:var(--litepicker-month-width);-webkit-box-sizing:content-box;box-sizing:content-box}.litepicker .container__months .month-item-header{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-weight:500;padding:10px 5px;text-align:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;color:var(--litepicker-month-header-color)}.litepicker .container__months .month-item-header div{-webkit-box-flex:1;-ms-flex:1;flex:1}.litepicker .container__months .month-item-header div>.month-item-name{margin-right:5px}.litepicker .container__months .month-item-header div>.month-item-year{padding:0}.litepicker .container__months .month-item-header .reset-button{color:var(--litepicker-button-reset-color)}.litepicker .container__months .month-item-header .reset-button>svg{fill:var(--litepicker-button-reset-color)}.litepicker .container__months .month-item-header .reset-button *{pointer-events:none}.litepicker .container__months .month-item-header .reset-button:hover{color:var(--litepicker-button-reset-color-hover)}.litepicker .container__months .month-item-header .reset-button:hover>svg{fill:var(--litepicker-button-reset-color-hover)}.litepicker .container__months .month-item-header .button-previous-month,.litepicker .container__months .month-item-header .button-next-month{visibility:hidden;text-decoration:none;padding:3px 5px;border-radius:3px;-webkit-transition:color 0.3s, border 0.3s;transition:color 0.3s, border 0.3s;cursor:default}.litepicker .container__months .month-item-header .button-previous-month *,.litepicker .container__months .month-item-header .button-next-month *{pointer-events:none}.litepicker .container__months .month-item-header .button-previous-month{color:var(--litepicker-button-prev-month-color)}.litepicker .container__months .month-item-header .button-previous-month>svg,.litepicker .container__months .month-item-header .button-previous-month>img{fill:var(--litepicker-button-prev-month-color)}.litepicker .container__months .month-item-header .button-previous-month:hover{color:var(--litepicker-button-prev-month-color-hover)}.litepicker .container__months .month-item-header .button-previous-month:hover>svg{fill:var(--litepicker-button-prev-month-color-hover)}.litepicker .container__months .month-item-header .button-next-month{color:var(--litepicker-button-next-month-color)}.litepicker .container__months .month-item-header .button-next-month>svg,.litepicker .container__months .month-item-header .button-next-month>img{fill:var(--litepicker-button-next-month-color)}.litepicker .container__months .month-item-header .button-next-month:hover{color:var(--litepicker-button-next-month-color-hover)}.litepicker .container__months .month-item-header .button-next-month:hover>svg{fill:var(--litepicker-button-next-month-color-hover)}.litepicker .container__months .month-item-weekdays-row{display:-webkit-box;display:-ms-flexbox;display:flex;justify-self:center;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;color:var(--litepicker-month-weekday-color)}.litepicker .container__months .month-item-weekdays-row>div{padding:5px 0;font-size:85%;-webkit-box-flex:1;-ms-flex:1;flex:1;width:var(--litepicker-day-width);text-align:center}.litepicker .container__months .month-item:first-child .button-previous-month{visibility:visible}.litepicker .container__months .month-item:last-child .button-next-month{visibility:visible}.litepicker .container__months .month-item.no-previous-month .button-previous-month{visibility:hidden}.litepicker .container__months .month-item.no-next-month .button-next-month{visibility:hidden}.litepicker .container__days{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;justify-self:center;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:center;-webkit-box-sizing:content-box;box-sizing:content-box}.litepicker .container__days>div,.litepicker .container__days>a{padding:5px 0;width:var(--litepicker-day-width)}.litepicker .container__days .day-item{color:var(--litepicker-day-color);text-align:center;text-decoration:none;border-radius:3px;-webkit-transition:color 0.3s, border 0.3s;transition:color 0.3s, border 0.3s;cursor:default}.litepicker .container__days .day-item:hover{color:var(--litepicker-day-color-hover);-webkit-box-shadow:inset 0 0 0 1px var(--litepicker-day-color-hover);box-shadow:inset 0 0 0 1px var(--litepicker-day-color-hover)}.litepicker .container__days .day-item.is-today{color:var(--litepicker-is-today-color)}.litepicker .container__days .day-item.is-locked{color:var(--litepicker-is-locked-color)}.litepicker .container__days .day-item.is-locked:hover{color:var(--litepicker-is-locked-color);-webkit-box-shadow:none;box-shadow:none;cursor:default}.litepicker .container__days .day-item.is-in-range{background-color:var(--litepicker-is-in-range-color);border-radius:0}.litepicker .container__days .day-item.is-start-date{color:var(--litepicker-is-start-color);background-color:var(--litepicker-is-start-color-bg);border-top-left-radius:5px;border-bottom-left-radius:5px;border-top-right-radius:0;border-bottom-right-radius:0}.litepicker .container__days .day-item.is-start-date.is-flipped{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px}.litepicker .container__days .day-item.is-end-date{color:var(--litepicker-is-end-color);background-color:var(--litepicker-is-end-color-bg);border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px}.litepicker .container__days .day-item.is-end-date.is-flipped{border-top-left-radius:5px;border-bottom-left-radius:5px;border-top-right-radius:0;border-bottom-right-radius:0}.litepicker .container__days .day-item.is-start-date.is-end-date{border-top-left-radius:5px;border-bottom-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px}.litepicker .container__days .day-item.is-highlighted{color:var(--litepicker-highlighted-day-color);background-color:var(--litepicker-highlighted-day-color-bg)}.litepicker .container__days .week-number{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;color:var(--litepicker-month-week-number-color);font-size:85%}.litepicker .container__footer{text-align:right;padding:10px 5px;margin:0 5px;background-color:var(--litepicker-footer-color-bg);-webkit-box-shadow:inset 0px 3px 3px 0px var(--litepicker-footer-box-shadow-color);box-shadow:inset 0px 3px 3px 0px var(--litepicker-footer-box-shadow-color);border-bottom-left-radius:5px;border-bottom-right-radius:5px}.litepicker .container__footer .preview-date-range{margin-right:10px;font-size:90%}.litepicker .container__footer .button-cancel{background-color:var(--litepicker-button-cancel-color-bg);color:var(--litepicker-button-cancel-color);border:0;padding:3px 7px 4px;border-radius:3px}.litepicker .container__footer .button-cancel *{pointer-events:none}.litepicker .container__footer .button-apply{background-color:var(--litepicker-button-apply-color-bg);color:var(--litepicker-button-apply-color);border:0;padding:3px 7px 4px;border-radius:3px;margin-left:10px;margin-right:10px}.litepicker .container__footer .button-apply:disabled{opacity:0.7}.litepicker .container__footer .button-apply *{pointer-events:none}.litepicker .container__tooltip{position:absolute;margin-top:-4px;padding:4px 8px;border-radius:4px;background-color:var(--litepicker-tooltip-color-bg);-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.25);box-shadow:0 1px 3px rgba(0,0,0,0.25);white-space:nowrap;font-size:11px;pointer-events:none;visibility:hidden}.litepicker .container__tooltip:before{position:absolute;bottom:-5px;left:calc(50% - 5px);border-top:5px solid rgba(0,0,0,0.12);border-right:5px solid transparent;border-left:5px solid transparent;content:""}.litepicker .container__tooltip:after{position:absolute;bottom:-4px;left:calc(50% - 4px);border-top:4px solid var(--litepicker-tooltip-color-bg);border-right:4px solid transparent;border-left:4px solid transparent;content:""}
+</style><title>DOGE: Complexity Tracker</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"><style>
+        :root { --primary: #e6b800; }
+        .trend-up { color: #ff5555; }
+        .trend-down { color: #55ff55; }
+        .spark-bar { width: 8px; border-radius: 2px 2px 0 0; transition: height 0.3s; }
+      </style><style>                      .htmx-indicator{opacity:0}                      .htmx-request .htmx-indicator{opacity:1; transition: opacity 200ms ease-in;}                      .htmx-request.htmx-indicator{opacity:1; transition: opacity 200ms ease-in;}                    </style></head><body><main class="container"><nav><ul><li><strong>📜 Reg Complexity Index</strong></li></ul></nav><p>Tracking the <strong>number of distinct sections</strong> (individual rules) enforced by agencies.</p><table role="grid"><thead><tr><th>Agency</th><th><span data-tooltip="Sum of agency regulatory document size" data-placement="left">Total Size</span></th><th><span data-tooltip="Average change in total document size/year" data-placement="left">Velocity</span></th><th><span data-tooltip="2 yrs ago, 1 yr ago, 60 days ago" data-placement="left">Trend</span></th></tr></thead><tbody><tr><td><span data-tooltip="Department of Justice" data-placement="right">DOJ</span></td><td>670.66 MB</td><td class="trend-up">+10.5 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="651.36 MB" style="
+                        height: 97.12322831080466%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 651362490"></div><div class="spark-bar" data-tooltip="659.95 MB" style="
+                        height: 98.40425070315213%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 659953740"></div><div class="spark-bar" data-tooltip="670.66 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 670655724"></div></div></td></tr><tr><td><span data-tooltip="Environmental Protection Agency" data-placement="right">EPA</span></td><td>606.79 MB</td><td class="trend-up">+8.56 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="591.07 MB" style="
+                        height: 97.40802718990153%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 591065595"></div><div class="spark-bar" data-tooltip="596.9 MB" style="
+                        height: 98.36963831904349%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 596900589"></div><div class="spark-bar" data-tooltip="606.79 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 606793518"></div></div></td></tr><tr><td><span data-tooltip="Gulf Coast Ecosystem Restoration Council" data-placement="right">Gulf Restoration Council</span></td><td>485.16 MB</td><td class="trend-up">+8.12 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="470.26 MB" style="
+                        height: 96.92719319001992%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 470256591"></div><div class="spark-bar" data-tooltip="475.65 MB" style="
+                        height: 98.03845731444056%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 475648053"></div><div class="spark-bar" data-tooltip="485.16 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 485164767"></div></div></td></tr><tr><td><span data-tooltip="Chemical Safety and Hazard Investigation Board" data-placement="right">CSB</span></td><td>477.34 MB</td><td class="trend-up">+8.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="462.46 MB" style="
+                        height: 96.88280869990065%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 462455925"></div><div class="spark-bar" data-tooltip="467.94 MB" style="
+                        height: 98.031345809601%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 467938299"></div><div class="spark-bar" data-tooltip="477.34 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 477335382"></div></div></td></tr><tr><td><span data-tooltip="Federal Permitting Improvement Steering Council" data-placement="right">FPISC</span></td><td>477.34 MB</td><td class="trend-up">+8.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="462.46 MB" style="
+                        height: 96.88280869990065%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 462455925"></div><div class="spark-bar" data-tooltip="467.94 MB" style="
+                        height: 98.031345809601%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 467938299"></div><div class="spark-bar" data-tooltip="477.34 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 477335382"></div></div></td></tr><tr><td><span data-tooltip="Department of Defense" data-placement="right">DOD</span></td><td>560.32 MB</td><td class="trend-up">+8.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="545.44 MB" style="
+                        height: 97.3448571114806%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 545441067"></div><div class="spark-bar" data-tooltip="551.13 MB" style="
+                        height: 98.36058599397676%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 551132382"></div><div class="spark-bar" data-tooltip="560.32 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 560318319"></div></div></td></tr><tr><td><span data-tooltip="Department of Treasury" data-placement="right">TREAS</span></td><td>313.15 MB</td><td class="trend-up">+4.54 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="304.81 MB" style="
+                        height: 97.33782995539009%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 304808826"></div><div class="spark-bar" data-tooltip="312.89 MB" style="
+                        height: 99.9170851321709%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 312885642"></div><div class="spark-bar" data-tooltip="313.15 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 313145286"></div></div></td></tr><tr><td><span data-tooltip="Export-Import Bank of the United States" data-placement="right">EIB/USEIB</span></td><td>162.91 MB</td><td class="trend-up">+3.6 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="156.31 MB" style="
+                        height: 95.94573549581546%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 156308409"></div><div class="spark-bar" data-tooltip="162.38 MB" style="
+                        height: 99.66975081544423%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 162375327"></div><div class="spark-bar" data-tooltip="162.91 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 162913347"></div></div></td></tr><tr><td><span data-tooltip="Consumer Financial Protection Bureau" data-placement="right">CFPB</span></td><td>155.08 MB</td><td class="trend-up">+3.58 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="148.51 MB" style="
+                        height: 95.75957506166885%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 148507743"></div><div class="spark-bar" data-tooltip="154.67 MB" style="
+                        height: 99.73021775133654%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 154665573"></div><div class="spark-bar" data-tooltip="155.08 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 155083962"></div></div></td></tr><tr><td><span data-tooltip="Farm Credit Administration" data-placement="right">FCA</span></td><td>155.08 MB</td><td class="trend-up">+3.58 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="148.51 MB" style="
+                        height: 95.75957506166885%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 148507743"></div><div class="spark-bar" data-tooltip="154.67 MB" style="
+                        height: 99.73021775133654%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 154665573"></div><div class="spark-bar" data-tooltip="155.08 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 155083962"></div></div></td></tr><tr><td><span data-tooltip="Farm Credit System Insurance Corporation" data-placement="right">FCSIC</span></td><td>155.08 MB</td><td class="trend-up">+3.58 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="148.51 MB" style="
+                        height: 95.75957506166885%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 148507743"></div><div class="spark-bar" data-tooltip="154.67 MB" style="
+                        height: 99.73021775133654%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 154665573"></div><div class="spark-bar" data-tooltip="155.08 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 155083962"></div></div></td></tr><tr><td><span data-tooltip="Federal Deposit Insurance Corporation" data-placement="right">FDIC</span></td><td>155.08 MB</td><td class="trend-up">+3.58 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="148.51 MB" style="
+                        height: 95.75957506166885%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 148507743"></div><div class="spark-bar" data-tooltip="154.67 MB" style="
+                        height: 99.73021775133654%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 154665573"></div><div class="spark-bar" data-tooltip="155.08 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 155083962"></div></div></td></tr><tr><td><span data-tooltip="Federal Housing Finance Agency" data-placement="right">FHFA</span></td><td>155.08 MB</td><td class="trend-up">+3.58 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="148.51 MB" style="
+                        height: 95.75957506166885%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 148507743"></div><div class="spark-bar" data-tooltip="154.67 MB" style="
+                        height: 99.73021775133654%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 154665573"></div><div class="spark-bar" data-tooltip="155.08 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 155083962"></div></div></td></tr><tr><td><span data-tooltip="National Credit Union Administration" data-placement="right">NCUA</span></td><td>155.08 MB</td><td class="trend-up">+3.58 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="148.51 MB" style="
+                        height: 95.75957506166885%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 148507743"></div><div class="spark-bar" data-tooltip="154.67 MB" style="
+                        height: 99.73021775133654%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 154665573"></div><div class="spark-bar" data-tooltip="155.08 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 155083962"></div></div></td></tr><tr><td><span data-tooltip="Federal Financial Institutions Examination Council" data-placement="right">FFIEC</span></td><td>119.37 MB</td><td class="trend-up">+3.35 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="113.22 MB" style="
+                        height: 94.85005119795989%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 113224350"></div><div class="spark-bar" data-tooltip="119.25 MB" style="
+                        height: 99.89368104786833%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 119245029"></div><div class="spark-bar" data-tooltip="119.37 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 119371944"></div></div></td></tr><tr><td><span data-tooltip="Federal Financing Bank" data-placement="right">Federal Financing Bank</span></td><td>119.37 MB</td><td class="trend-up">+3.35 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="113.22 MB" style="
+                        height: 94.85005119795989%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 113224350"></div><div class="spark-bar" data-tooltip="119.25 MB" style="
+                        height: 99.89368104786833%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 119245029"></div><div class="spark-bar" data-tooltip="119.37 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 119371944"></div></div></td></tr><tr><td><span data-tooltip="Federal Reserve System" data-placement="right">FRS</span></td><td>119.37 MB</td><td class="trend-up">+3.35 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="113.22 MB" style="
+                        height: 94.85005119795989%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 113224350"></div><div class="spark-bar" data-tooltip="119.25 MB" style="
+                        height: 99.89368104786833%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 119245029"></div><div class="spark-bar" data-tooltip="119.37 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 119371944"></div></div></td></tr><tr><td><span data-tooltip="Financial Stability Oversight Council" data-placement="right">FSOC</span></td><td>119.37 MB</td><td class="trend-up">+3.35 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="113.22 MB" style="
+                        height: 94.85005119795989%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 113224350"></div><div class="spark-bar" data-tooltip="119.25 MB" style="
+                        height: 99.89368104786833%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 119245029"></div><div class="spark-bar" data-tooltip="119.37 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 119371944"></div></div></td></tr><tr><td><span data-tooltip="East-West Foreign Trade Board" data-placement="right">East-West Foreign Trade Board</span></td><td>41.12 MB</td><td class="trend-up">+2.32 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="36.85 MB" style="
+                        height: 89.6196369346214%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 36851031"></div><div class="spark-bar" data-tooltip="38.18 MB" style="
+                        height: 92.8616855544799%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 38184141"></div><div class="spark-bar" data-tooltip="41.12 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 41119371"></div></div></td></tr><tr><td><span data-tooltip="Office of United States Trade Representative" data-placement="right">USTR</span></td><td>41.12 MB</td><td class="trend-up">+2.32 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="36.85 MB" style="
+                        height: 89.6196369346214%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 36851031"></div><div class="spark-bar" data-tooltip="38.18 MB" style="
+                        height: 92.8616855544799%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 38184141"></div><div class="spark-bar" data-tooltip="41.12 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 41119371"></div></div></td></tr><tr><td><span data-tooltip="Court Services and Offender Supervision Agency for the District of Columbia" data-placement="right">CSOSA</span></td><td>68.28 MB</td><td class="trend-up">+2.21 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="64.21 MB" style="
+                        height: 94.04972190636012%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 64213485"></div><div class="spark-bar" data-tooltip="66.69 MB" style="
+                        height: 97.67359305788148%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 66687723"></div><div class="spark-bar" data-tooltip="68.28 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 68276103"></div></div></td></tr><tr><td><span data-tooltip="Department of State" data-placement="right">DOS</span></td><td>128.47 MB</td><td class="trend-up">+2.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="124.61 MB" style="
+                        height: 96.99276480463823%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 124610151"></div><div class="spark-bar" data-tooltip="127.25 MB" style="
+                        height: 99.04988381431288%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 127253007"></div><div class="spark-bar" data-tooltip="128.47 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 128473656"></div></div></td></tr><tr><td><span data-tooltip="Office of Independent Counsel" data-placement="right">Office of Independent Counsel</span></td><td>32.56 MB</td><td class="trend-up">+1.98 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="28.93 MB" style="
+                        height: 88.84048791790097%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 28930092"></div><div class="spark-bar" data-tooltip="31.27 MB" style="
+                        height: 96.01737312748078%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 31267179"></div><div class="spark-bar" data-tooltip="32.56 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 32564085"></div></div></td></tr><tr><td><span data-tooltip="National Crime Prevention and Privacy Compact Council" data-placement="right">NCPPCC</span></td><td>32.56 MB</td><td class="trend-up">+1.98 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="28.93 MB" style="
+                        height: 88.84048791790097%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 28930092"></div><div class="spark-bar" data-tooltip="31.27 MB" style="
+                        height: 96.01737312748078%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 31267179"></div><div class="spark-bar" data-tooltip="32.56 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 32564085"></div></div></td></tr><tr><td><span data-tooltip="Department of Health and Human Services" data-placement="right">HHS</span></td><td>157.43 MB</td><td class="trend-up">+1.9 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="153.95 MB" style="
+                        height: 97.78594033208752%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 153947889"></div><div class="spark-bar" data-tooltip="156.32 MB" style="
+                        height: 99.29290934800802%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 156320364"></div><div class="spark-bar" data-tooltip="157.43 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 157433562"></div></div></td></tr><tr><td><span data-tooltip="National Science Foundation" data-placement="right">NSF</span></td><td>157.43 MB</td><td class="trend-up">+1.9 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="153.95 MB" style="
+                        height: 97.78594033208752%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 153947889"></div><div class="spark-bar" data-tooltip="156.32 MB" style="
+                        height: 99.29290934800802%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 156320364"></div><div class="spark-bar" data-tooltip="157.43 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 157433562"></div></div></td></tr><tr><td><span data-tooltip="Office of Personnel Management" data-placement="right">OPM</span></td><td>149.6 MB</td><td class="trend-up">+1.88 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="146.15 MB" style="
+                        height: 97.68926638993509%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 146147223"></div><div class="spark-bar" data-tooltip="148.61 MB" style="
+                        height: 99.33586947909883%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 148610610"></div><div class="spark-bar" data-tooltip="149.6 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 149604177"></div></div></td></tr><tr><td><span data-tooltip="Commission on Civil Rights" data-placement="right">CRC</span></td><td>82.56 MB</td><td class="trend-up">+1.71 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="79.41 MB" style="
+                        height: 96.194584760722%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 79414740"></div><div class="spark-bar" data-tooltip="81.6 MB" style="
+                        height: 98.84212907081941%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 81600456"></div><div class="spark-bar" data-tooltip="82.56 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 82556352"></div></div></td></tr><tr><td><span data-tooltip="Corporation for National and Community Service" data-placement="right">CORP/CNCS</span></td><td>54.67 MB</td><td class="trend-up">+1.49 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="51.93 MB" style="
+                        height: 94.98533106921079%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 51932013"></div><div class="spark-bar" data-tooltip="53.89 MB" style="
+                        height: 98.5659417095808%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 53889666"></div><div class="spark-bar" data-tooltip="54.67 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 54673719"></div></div></td></tr><tr><td><span data-tooltip="Arctic Research Commission" data-placement="right">ARCTIC</span></td><td>46.84 MB</td><td class="trend-up">+1.48 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="44.13 MB" style="
+                        height: 94.20850555800409%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 44131347"></div><div class="spark-bar" data-tooltip="46.18 MB" style="
+                        height: 98.58163849655756%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46179912"></div><div class="spark-bar" data-tooltip="46.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 46844334"></div></div></td></tr><tr><td><span data-tooltip="Denali Commission" data-placement="right">DC</span></td><td>46.84 MB</td><td class="trend-up">+1.48 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="44.13 MB" style="
+                        height: 94.20850555800409%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 44131347"></div><div class="spark-bar" data-tooltip="46.18 MB" style="
+                        height: 98.58163849655756%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46179912"></div><div class="spark-bar" data-tooltip="46.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 46844334"></div></div></td></tr><tr><td><span data-tooltip="Commission of Fine Arts" data-placement="right">CFA</span></td><td>46.84 MB</td><td class="trend-up">+1.48 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="44.13 MB" style="
+                        height: 94.20850555800409%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 44131347"></div><div class="spark-bar" data-tooltip="46.18 MB" style="
+                        height: 98.58163849655756%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46179912"></div><div class="spark-bar" data-tooltip="46.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 46844334"></div></div></td></tr><tr><td><span data-tooltip="Harry S. Truman Scholarship Foundation" data-placement="right">HST</span></td><td>46.84 MB</td><td class="trend-up">+1.48 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="44.13 MB" style="
+                        height: 94.20850555800409%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 44131347"></div><div class="spark-bar" data-tooltip="46.18 MB" style="
+                        height: 98.58163849655756%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46179912"></div><div class="spark-bar" data-tooltip="46.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 46844334"></div></div></td></tr><tr><td><span data-tooltip="James Madison Memorial Fellowship Foundation" data-placement="right">James Madison Memorial Fellowship Foundation</span></td><td>46.84 MB</td><td class="trend-up">+1.48 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="44.13 MB" style="
+                        height: 94.20850555800409%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 44131347"></div><div class="spark-bar" data-tooltip="46.18 MB" style="
+                        height: 98.58163849655756%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46179912"></div><div class="spark-bar" data-tooltip="46.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 46844334"></div></div></td></tr><tr><td><span data-tooltip="Legal Services Corporation" data-placement="right">LSC</span></td><td>46.84 MB</td><td class="trend-up">+1.48 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="44.13 MB" style="
+                        height: 94.20850555800409%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 44131347"></div><div class="spark-bar" data-tooltip="46.18 MB" style="
+                        height: 98.58163849655756%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46179912"></div><div class="spark-bar" data-tooltip="46.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 46844334"></div></div></td></tr><tr><td><span data-tooltip="National Commission on Libraries and Information Science" data-placement="right">NCLIS</span></td><td>46.84 MB</td><td class="trend-up">+1.48 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="44.13 MB" style="
+                        height: 94.20850555800409%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 44131347"></div><div class="spark-bar" data-tooltip="46.18 MB" style="
+                        height: 98.58163849655756%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46179912"></div><div class="spark-bar" data-tooltip="46.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 46844334"></div></div></td></tr><tr><td><span data-tooltip="National Foundation on the Arts and the Humanities" data-placement="right">ARTS</span></td><td>46.84 MB</td><td class="trend-up">+1.48 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="44.13 MB" style="
+                        height: 94.20850555800409%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 44131347"></div><div class="spark-bar" data-tooltip="46.18 MB" style="
+                        height: 98.58163849655756%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46179912"></div><div class="spark-bar" data-tooltip="46.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 46844334"></div></div></td></tr><tr><td><span data-tooltip="Utah Reclamation Mitigation and Conservation Commission" data-placement="right">URMCC</span></td><td>28.33 MB</td><td class="trend-up">+1.43 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="25.71 MB" style="
+                        height: 90.72532862833721%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 25706238"></div><div class="spark-bar" data-tooltip="26.18 MB" style="
+                        height: 92.40165290376244%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 26181210"></div><div class="spark-bar" data-tooltip="28.33 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 28334136"></div></div></td></tr><tr><td><span data-tooltip="National Aeronautics and Space Administration" data-placement="right">NASA</span></td><td>164.13 MB</td><td class="trend-up">+1.15 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="162.02 MB" style="
+                        height: 98.71549456703515%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 162023373"></div><div class="spark-bar" data-tooltip="162.82 MB" style="
+                        height: 99.1983100298149%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 162815826"></div><div class="spark-bar" data-tooltip="164.13 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 164131653"></div></div></td></tr><tr><td><span data-tooltip="National Railroad Passenger Corporation" data-placement="right">AMTRAK</span></td><td>98.91 MB</td><td class="trend-up">+1.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="96.9 MB" style="
+                        height: 97.9622354919407%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 96896328"></div><div class="spark-bar" data-tooltip="98.46 MB" style="
+                        height: 99.5425202543839%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 98459418"></div><div class="spark-bar" data-tooltip="98.91 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 98911920"></div></div></td></tr><tr><td><span data-tooltip="National Transportation Safety Board" data-placement="right">NTSB</span></td><td>98.91 MB</td><td class="trend-up">+1.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="96.9 MB" style="
+                        height: 97.9622354919407%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 96896328"></div><div class="spark-bar" data-tooltip="98.46 MB" style="
+                        height: 99.5425202543839%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 98459418"></div><div class="spark-bar" data-tooltip="98.91 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 98911920"></div></div></td></tr><tr><td><span data-tooltip="Surface Transportation Board" data-placement="right">STB</span></td><td>98.91 MB</td><td class="trend-up">+1.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="96.9 MB" style="
+                        height: 97.9622354919407%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 96896328"></div><div class="spark-bar" data-tooltip="98.46 MB" style="
+                        height: 99.5425202543839%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 98459418"></div><div class="spark-bar" data-tooltip="98.91 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 98911920"></div></div></td></tr><tr><td><span data-tooltip="Commodity Futures Trading Commission" data-placement="right">CFTC</span></td><td>87.6 MB</td><td class="trend-up">+1.04 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="85.68 MB" style="
+                        height: 97.81560451184217%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 85684524"></div><div class="spark-bar" data-tooltip="87.13 MB" style="
+                        height: 99.47113182741101%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 87134733"></div><div class="spark-bar" data-tooltip="87.6 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 87598011"></div></div></td></tr><tr><td><span data-tooltip="Securities and Exchange Commission" data-placement="right">SEC</span></td><td>87.6 MB</td><td class="trend-up">+1.04 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="85.68 MB" style="
+                        height: 97.81560451184217%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 85684524"></div><div class="spark-bar" data-tooltip="87.13 MB" style="
+                        height: 99.47113182741101%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 87134733"></div><div class="spark-bar" data-tooltip="87.6 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 87598011"></div></div></td></tr><tr><td><span data-tooltip="Neighborhood Reinvestment Corporation" data-placement="right">NEIGHBOR</span></td><td>39.03 MB</td><td class="trend-up">+975.62 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="37.24 MB" style="
+                        height: 95.40768449326768%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 37236108"></div><div class="spark-bar" data-tooltip="37.88 MB" style="
+                        height: 97.0619560886099%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 37881744"></div><div class="spark-bar" data-tooltip="39.03 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 39028416"></div></div></td></tr><tr><td><span data-tooltip="Air Transportation System Stabilization" data-placement="right">ATSB</span></td><td>53.54 MB</td><td class="trend-up">+727.01 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="52.21 MB" style="
+                        height: 97.50554069973484%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 52206831"></div><div class="spark-bar" data-tooltip="52.68 MB" style="
+                        height: 98.3806280720382%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 52675374"></div><div class="spark-bar" data-tooltip="53.54 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 53542425"></div></div></td></tr><tr><td><span data-tooltip="Consumer Product Safety Commission" data-placement="right">CPSC</span></td><td>56.43 MB</td><td class="trend-up">+535.74 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="55.45 MB" style="
+                        height: 98.2560121883733%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 55449906"></div><div class="spark-bar" data-tooltip="55.88 MB" style="
+                        height: 99.01844469594718%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 55880178"></div><div class="spark-bar" data-tooltip="56.43 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 56434110"></div></div></td></tr><tr><td><span data-tooltip="Federal Trade Commission" data-placement="right">FTC</span></td><td>56.43 MB</td><td class="trend-up">+535.74 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="55.45 MB" style="
+                        height: 98.2560121883733%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 55449906"></div><div class="spark-bar" data-tooltip="55.88 MB" style="
+                        height: 99.01844469594718%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 55880178"></div><div class="spark-bar" data-tooltip="56.43 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 56434110"></div></div></td></tr><tr><td><span data-tooltip="Department of Interior" data-placement="right">DOI</span></td><td>129.46 MB</td><td class="trend-up">+461.85 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="128.61 MB" style="
+                        height: 99.34460202640335%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 128609670"></div><div class="spark-bar" data-tooltip="128.96 MB" style="
+                        height: 99.6169835165864%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 128962290"></div><div class="spark-bar" data-tooltip="129.46 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 129458136"></div></div></td></tr><tr><td><span data-tooltip="Department of Labor" data-placement="right">DOL</span></td><td>129.46 MB</td><td class="trend-up">+461.85 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="128.61 MB" style="
+                        height: 99.34460202640335%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 128609670"></div><div class="spark-bar" data-tooltip="128.96 MB" style="
+                        height: 99.6169835165864%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 128962290"></div><div class="spark-bar" data-tooltip="129.46 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 129458136"></div></div></td></tr><tr><td><span data-tooltip="Armed Forces Retirement Home" data-placement="right">AFRH</span></td><td>65.18 MB</td><td class="trend-up">+452.69 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="64.35 MB" style="
+                        height: 98.72402803066645%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 64345263"></div><div class="spark-bar" data-tooltip="64.45 MB" style="
+                        height: 98.88374258721288%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 64449360"></div><div class="spark-bar" data-tooltip="65.18 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 65176902"></div></div></td></tr><tr><td><span data-tooltip="General Services Administration" data-placement="right">GSA</span></td><td>121.63 MB</td><td class="trend-up">+446.22 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="120.81 MB" style="
+                        height: 99.32602530794713%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 120809004"></div><div class="spark-bar" data-tooltip="121.25 MB" style="
+                        height: 99.69068579845896%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 121252536"></div><div class="spark-bar" data-tooltip="121.63 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 121628751"></div></div></td></tr><tr><td><span data-tooltip="Department of Homeland Security" data-placement="right">DHS</span></td><td>59.86 MB</td><td class="trend-up">+428.62 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="59.08 MB" style="
+                        height: 98.6846384797995%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 59075220"></div><div class="spark-bar" data-tooltip="59.38 MB" style="
+                        height: 99.19466618823797%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 59380536"></div><div class="spark-bar" data-tooltip="59.86 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 59862630"></div></div></td></tr><tr><td><span data-tooltip="Department of Housing and Urban Development" data-placement="right">HUD</span></td><td>110.59 MB</td><td class="trend-up">+420.6 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="109.82 MB" style="
+                        height: 99.30130084640794%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 109816542"></div><div class="spark-bar" data-tooltip="110.14 MB" style="
+                        height: 99.59419555763604%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 110140452"></div><div class="spark-bar" data-tooltip="110.59 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 110589228"></div></div></td></tr><tr><td><span data-tooltip="Office of Management and Budget" data-placement="right">OMB</span></td><td>110.59 MB</td><td class="trend-up">+420.6 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="109.82 MB" style="
+                        height: 99.30130084640794%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 109816542"></div><div class="spark-bar" data-tooltip="110.14 MB" style="
+                        height: 99.59419555763604%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 110140452"></div><div class="spark-bar" data-tooltip="110.59 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 110589228"></div></div></td></tr><tr><td><span data-tooltip="Department of Veterans Affairs" data-placement="right">VA</span></td><td>104.34 MB</td><td class="trend-up">+406.66 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="103.6 MB" style="
+                        height: 99.28401379408774%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 103595019"></div><div class="spark-bar" data-tooltip="103.75 MB" style="
+                        height: 99.43132251112384%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 103748724"></div><div class="spark-bar" data-tooltip="104.34 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 104342094"></div></div></td></tr><tr><td><span data-tooltip="United States International Trade Commission" data-placement="right">ITC</span></td><td>32.35 MB</td><td class="trend-up">+356.16 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="31.7 MB" style="
+                        height: 97.97751915024703%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 31697493"></div><div class="spark-bar" data-tooltip="31.71 MB" style="
+                        height: 98.02196489704036%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 31711872"></div><div class="spark-bar" data-tooltip="32.35 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 32351802"></div></div></td></tr><tr><td><span data-tooltip="Office of National Drug Control Policy" data-placement="right">ONDCP</span></td><td>73.85 MB</td><td class="trend-up">+334.98 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="73.24 MB" style="
+                        height: 99.16672834475536%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 73235805"></div><div class="spark-bar" data-tooltip="73.02 MB" style="
+                        height: 98.88049597470243%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 73024419"></div><div class="spark-bar" data-tooltip="73.85 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 73851186"></div></div></td></tr><tr><td><span data-tooltip="Postal Regulatory Commission" data-placement="right">PRC</span></td><td>42.93 MB</td><td class="trend-up">+321.59 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="42.33 MB" style="
+                        height: 98.62368294646787%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 42334854"></div><div class="spark-bar" data-tooltip="42.69 MB" style="
+                        height: 99.44067004977234%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 42685551"></div><div class="spark-bar" data-tooltip="42.93 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 42925647"></div></div></td></tr><tr><td><span data-tooltip="United States Postal Service" data-placement="right">USPS</span></td><td>42.93 MB</td><td class="trend-up">+321.59 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="42.33 MB" style="
+                        height: 98.62368294646787%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 42334854"></div><div class="spark-bar" data-tooltip="42.69 MB" style="
+                        height: 99.44067004977234%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 42685551"></div><div class="spark-bar" data-tooltip="42.93 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 42925647"></div></div></td></tr><tr><td><span data-tooltip="Department of Transportation" data-placement="right">DOT</span></td><td>117.86 MB</td><td class="trend-up">+292.69 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="117.33 MB" style="
+                        height: 99.54379284522302%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 117326514"></div><div class="spark-bar" data-tooltip="117.41 MB" style="
+                        height: 99.61846181664343%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 117414522"></div><div class="spark-bar" data-tooltip="117.86 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 117864219"></div></div></td></tr><tr><td><span data-tooltip="Department of Education" data-placement="right">ED</span></td><td>43.54 MB</td><td class="trend-up">+248.95 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="43.08 MB" style="
+                        height: 98.94963421367015%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 43084059"></div><div class="spark-bar" data-tooltip="43.13 MB" style="
+                        height: 99.05582968927298%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 43130298"></div><div class="spark-bar" data-tooltip="43.54 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 43541403"></div></div></td></tr><tr><td><span data-tooltip="Federal Election Commission" data-placement="right">FEC</span></td><td>40.83 MB</td><td class="trend-up">+240.72 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="40.39 MB" style="
+                        height: 98.91700737328077%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 40391295"></div><div class="spark-bar" data-tooltip="40.54 MB" style="
+                        height: 99.27804165004736%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 40538718"></div><div class="spark-bar" data-tooltip="40.83 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 40833519"></div></div></td></tr><tr><td><span data-tooltip="National Archives and Records Administration" data-placement="right">NARA</span></td><td>68.34 MB</td><td class="trend-up">+236.49 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="67.9 MB" style="
+                        height: 99.36422098159879%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 67901073"></div><div class="spark-bar" data-tooltip="68.12 MB" style="
+                        height: 99.69159530701567%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 68124786"></div><div class="spark-bar" data-tooltip="68.34 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 68335536"></div></div></td></tr><tr><td><span data-tooltip="Office of Navajo and Hopi Indian Relocation" data-placement="right">ONHIR</span></td><td>19.38 MB</td><td class="trend-up">+235.45 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="18.95 MB" style="
+                        height: 97.76838511790345%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 18949968"></div><div class="spark-bar" data-tooltip="19.08 MB" style="
+                        height: 98.46231997495062%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 19084470"></div><div class="spark-bar" data-tooltip="19.38 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 19382511"></div></div></td></tr><tr><td><span data-tooltip="Special Inspector General for Afghanistan Reconstruction" data-placement="right">SIGAR</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Appalachian Regional Commission" data-placement="right">ARC</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Council of the Inspectors General on Integrity and Efficiency" data-placement="right">CIGIE</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Federal Retirement Thrift Investment Board" data-placement="right">FRTIB</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Office of Government Ethics" data-placement="right">OGE</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="International Organizations Employees Loyalty Board" data-placement="right">International Organizations Employees Loyalty Board</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Interstate Commerce Commission" data-placement="right">ICC</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Merit Systems Protection Board" data-placement="right">MSPB</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Military Compensation and Retirement Modernization Commission" data-placement="right">Military Compensation and Retirement Modernization Commission</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Office of Special Counsel" data-placement="right">OSC</span></td><td>35.71 MB</td><td class="trend-up">+233.32 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="35.28 MB" style="
+                        height: 98.79977379043659%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 35283393"></div><div class="spark-bar" data-tooltip="35.42 MB" style="
+                        height: 99.18382097589668%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 35420544"></div><div class="spark-bar" data-tooltip="35.71 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 35712018"></div></div></td></tr><tr><td><span data-tooltip="Marine Mammal Commission" data-placement="right">MMC</span></td><td>89.55 MB</td><td class="trend-up">+200.5 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="89.18 MB" style="
+                        height: 98.57547355884367%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 89180880"></div><div class="spark-bar" data-tooltip="90.47 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 90469644"></div><div class="spark-bar" data-tooltip="89.55 MB" style="
+                        height: 98.98261564951002%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 89549220"></div></div></td></tr><tr><td><span data-tooltip="United States International Development Finance Corporation" data-placement="right">DFC</span></td><td>64.57 MB</td><td class="trend-up">+186.6 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="64.23 MB" style="
+                        height: 99.46914198775836%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 64230969"></div><div class="spark-bar" data-tooltip="64.4 MB" style="
+                        height: 99.72504932498592%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 64396218"></div><div class="spark-bar" data-tooltip="64.57 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 64573764"></div></div></td></tr><tr><td><span data-tooltip="Privacy and Civil Liberties Oversight Board" data-placement="right">PCLOB</span></td><td>5.59 MB</td><td class="trend-up">+183.86 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="5.26 MB" style="
+                        height: 93.96191849115536%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 5256132"></div><div class="spark-bar" data-tooltip="5.59 MB" style="
+                        height: 99.93998815852136%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 5590539"></div><div class="spark-bar" data-tooltip="5.59 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 5593896"></div></div></td></tr><tr><td><span data-tooltip="Federal Acquisition Regulatory Council" data-placement="right">Federal Acquisition Regulatory Council</span></td><td>67.05 MB</td><td class="trend-up">+171.65 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="66.73 MB" style="
+                        height: 99.52967601857331%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 66732483"></div><div class="spark-bar" data-tooltip="67.01 MB" style="
+                        height: 99.94381473224523%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 67010154"></div><div class="spark-bar" data-tooltip="67.05 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 67047825"></div></div></td></tr><tr><td><span data-tooltip="Federal Labor Relations Authority" data-placement="right">FLRA</span></td><td>56.74 MB</td><td class="trend-up">+170.96 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="56.43 MB" style="
+                        height: 99.44650729193812%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 56430303"></div><div class="spark-bar" data-tooltip="56.69 MB" style="
+                        height: 99.8979370273838%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 56686464"></div><div class="spark-bar" data-tooltip="56.74 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 56744379"></div></div></td></tr><tr><td><span data-tooltip="Inter-American Foundation" data-placement="right">IAF</span></td><td>56.74 MB</td><td class="trend-up">+170.96 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="56.43 MB" style="
+                        height: 99.44650729193812%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 56430303"></div><div class="spark-bar" data-tooltip="56.69 MB" style="
+                        height: 99.8979370273838%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 56686464"></div><div class="spark-bar" data-tooltip="56.74 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 56744379"></div></div></td></tr><tr><td><span data-tooltip="National Council on Disability" data-placement="right">NCD</span></td><td>63.84 MB</td><td class="trend-up">+135.54 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="63.59 MB" style="
+                        height: 99.609958444219%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 63592650"></div><div class="spark-bar" data-tooltip="63.46 MB" style="
+                        height: 99.39878442068681%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 63457833"></div><div class="spark-bar" data-tooltip="63.84 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 63841659"></div></div></td></tr><tr><td><span data-tooltip="Tennessee Valley Authority" data-placement="right">TVA</span></td><td>53.15 MB</td><td class="trend-up">+129.64 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="52.91 MB" style="
+                        height: 99.55188550377714%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 52909860"></div><div class="spark-bar" data-tooltip="52.85 MB" style="
+                        height: 99.44542811224741%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 52853280"></div><div class="spark-bar" data-tooltip="53.15 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 53148024"></div></div></td></tr><tr><td><span data-tooltip="Agency for International Development" data-placement="right">USAID</span></td><td>95.91 MB</td><td class="trend-up">+124.93 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="95.68 MB" style="
+                        height: 99.68144359811117%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 95680059"></div><div class="spark-bar" data-tooltip="95.99 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 95985828"></div><div class="spark-bar" data-tooltip="95.91 MB" style="
+                        height: 99.92055389676902%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 95909571"></div></div></td></tr><tr><td><span data-tooltip="Small Business Administration" data-placement="right">SBA</span></td><td>20.36 MB</td><td class="trend-up">+117.58 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="20.14 MB" style="
+                        height: 98.93898875902799%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 20141937"></div><div class="spark-bar" data-tooltip="20.13 MB" style="
+                        height: 98.86555793939239%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 20126988"></div><div class="spark-bar" data-tooltip="20.36 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 20357937"></div></div></td></tr><tr><td><span data-tooltip="African Development Foundation" data-placement="right">USADF</span></td><td>88.08 MB</td><td class="trend-up">+109.3 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="87.88 MB" style="
+                        height: 99.55063588351246%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 87879393"></div><div class="spark-bar" data-tooltip="88.28 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 88276074"></div><div class="spark-bar" data-tooltip="88.08 MB" style="
+                        height: 99.77809615774258%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 88080186"></div></div></td></tr><tr><td><span data-tooltip="United States Agency for Global Media" data-placement="right">USAGM</span></td><td>88.08 MB</td><td class="trend-up">+109.3 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="87.88 MB" style="
+                        height: 99.55063588351246%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 87879393"></div><div class="spark-bar" data-tooltip="88.28 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 88276074"></div><div class="spark-bar" data-tooltip="88.08 MB" style="
+                        height: 99.77809615774258%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 88080186"></div></div></td></tr><tr><td><span data-tooltip="Emergency Oil and Gas Guaranteed Loan Board" data-placement="right">Emergency Oil and Gas Guaranteed Loan Board</span></td><td>12.53 MB</td><td class="trend-up">+101.94 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="12.34 MB" style="
+                        height: 98.50516643902664%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 12341271"></div><div class="spark-bar" data-tooltip="12.42 MB" style="
+                        height: 99.11148550925917%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 12417234"></div><div class="spark-bar" data-tooltip="12.53 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 12528552"></div></div></td></tr><tr><td><span data-tooltip="Emergency Steel Guarantee Loan Board" data-placement="right">Emergency Steel Guarantee Loan Board</span></td><td>12.53 MB</td><td class="trend-up">+101.94 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="12.34 MB" style="
+                        height: 98.50516643902664%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 12341271"></div><div class="spark-bar" data-tooltip="12.42 MB" style="
+                        height: 99.11148550925917%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 12417234"></div><div class="spark-bar" data-tooltip="12.53 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 12528552"></div></div></td></tr><tr><td><span data-tooltip="Equal Employment Opportunity Commission" data-placement="right">EEOC</span></td><td>123.33 MB</td><td class="trend-up">+69.97 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="123.2 MB" style="
+                        height: 98.93266633270382%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 123199680"></div><div class="spark-bar" data-tooltip="124.53 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 124528818"></div><div class="spark-bar" data-tooltip="123.33 MB" style="
+                        height: 99.03588099583503%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 123328212"></div></div></td></tr><tr><td><span data-tooltip="Federal Mediation and Conciliation Service" data-placement="right">FMCS</span></td><td>123.33 MB</td><td class="trend-up">+69.97 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="123.2 MB" style="
+                        height: 98.93266633270382%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 123199680"></div><div class="spark-bar" data-tooltip="124.53 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 124528818"></div><div class="spark-bar" data-tooltip="123.33 MB" style="
+                        height: 99.03588099583503%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 123328212"></div></div></td></tr><tr><td><span data-tooltip="Federal Mine Safety and Health Review Commission" data-placement="right">MSHFRC</span></td><td>123.33 MB</td><td class="trend-up">+69.97 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="123.2 MB" style="
+                        height: 98.93266633270382%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 123199680"></div><div class="spark-bar" data-tooltip="124.53 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 124528818"></div><div class="spark-bar" data-tooltip="123.33 MB" style="
+                        height: 99.03588099583503%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 123328212"></div></div></td></tr><tr><td><span data-tooltip="National Labor Relations Board" data-placement="right">NLRB</span></td><td>123.33 MB</td><td class="trend-up">+69.97 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="123.2 MB" style="
+                        height: 98.93266633270382%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 123199680"></div><div class="spark-bar" data-tooltip="124.53 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 124528818"></div><div class="spark-bar" data-tooltip="123.33 MB" style="
+                        height: 99.03588099583503%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 123328212"></div></div></td></tr><tr><td><span data-tooltip="National Mediation Board" data-placement="right">NMB</span></td><td>123.33 MB</td><td class="trend-up">+69.97 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="123.2 MB" style="
+                        height: 98.93266633270382%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 123199680"></div><div class="spark-bar" data-tooltip="124.53 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 124528818"></div><div class="spark-bar" data-tooltip="123.33 MB" style="
+                        height: 99.03588099583503%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 123328212"></div></div></td></tr><tr><td><span data-tooltip="Department of Commerce" data-placement="right">DOC</span></td><td>82.15 MB</td><td class="trend-up">+59.38 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="82.04 MB" style="
+                        height: 99.86722206018558%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 82043121"></div><div class="spark-bar" data-tooltip="81.99 MB" style="
+                        height: 99.8074026038572%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 81993978"></div><div class="spark-bar" data-tooltip="82.15 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 82152201"></div></div></td></tr><tr><td><span data-tooltip="Committee for Purchase From People Who Are Blind or Severely Disabled" data-placement="right">CPPBSD</span></td><td>18.87 MB</td><td class="trend-up">+41.25 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="18.79 MB" style="
+                        height: 99.59838693367948%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 18793128"></div><div class="spark-bar" data-tooltip="18.82 MB" style="
+                        height: 99.75054200274865%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 18821838"></div><div class="spark-bar" data-tooltip="18.87 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 18868908"></div></div></td></tr><tr><td><span data-tooltip="Federal Acquisition Security Council" data-placement="right">FASC</span></td><td>18.87 MB</td><td class="trend-up">+41.25 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="18.79 MB" style="
+                        height: 99.59838693367948%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 18793128"></div><div class="spark-bar" data-tooltip="18.82 MB" style="
+                        height: 99.75054200274865%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 18821838"></div><div class="spark-bar" data-tooltip="18.87 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 18868908"></div></div></td></tr><tr><td><span data-tooltip="Federal Procurement Regulations System" data-placement="right">Federal Procurement Regulations System</span></td><td>18.87 MB</td><td class="trend-up">+41.25 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="18.79 MB" style="
+                        height: 99.59838693367948%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 18793128"></div><div class="spark-bar" data-tooltip="18.82 MB" style="
+                        height: 99.75054200274865%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 18821838"></div><div class="spark-bar" data-tooltip="18.87 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 18868908"></div></div></td></tr><tr><td><span data-tooltip="Federal Property Management Regulations System" data-placement="right">Federal Property Management Regulations System</span></td><td>18.87 MB</td><td class="trend-up">+41.25 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="18.79 MB" style="
+                        height: 99.59838693367948%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 18793128"></div><div class="spark-bar" data-tooltip="18.82 MB" style="
+                        height: 99.75054200274865%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 18821838"></div><div class="spark-bar" data-tooltip="18.87 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 18868908"></div></div></td></tr><tr><td><span data-tooltip="Federal Travel Regulation System" data-placement="right">Federal Travel Regulation System</span></td><td>18.87 MB</td><td class="trend-up">+41.25 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="18.79 MB" style="
+                        height: 99.59838693367948%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 18793128"></div><div class="spark-bar" data-tooltip="18.82 MB" style="
+                        height: 99.75054200274865%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 18821838"></div><div class="spark-bar" data-tooltip="18.87 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 18868908"></div></div></td></tr><tr><td><span data-tooltip="Election Assistance Commission" data-placement="right">EAC</span></td><td>12.95 MB</td><td class="trend-up">+23.04 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="12.91 MB" style="
+                        height: 99.67324243298876%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 12908568"></div><div class="spark-bar" data-tooltip="12.83 MB" style="
+                        height: 99.05058233081505%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 12827928"></div><div class="spark-bar" data-tooltip="12.95 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 12950886"></div></div></td></tr><tr><td><span data-tooltip="Government Accountability Office" data-placement="right">GAO</span></td><td>1.28 MB</td><td class="trend-up">+8.4 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="1.26 MB" style="
+                        height: 98.7919229947729%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2023-11-26: 1262706"></div><div class="spark-bar" data-tooltip="1.28 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2024-11-26: 1278147"></div><div class="spark-bar" data-tooltip="1.28 MB" style="
+                        height: 100%;
+                        background-color: #ff5555;
+                        opacity: 0.8;
+                      " title="2025-09-27: 1278147"></div></div></td></tr><tr><td><span data-tooltip="Administrative Conference of the United States" data-placement="right">ACUS</span></td><td>1.49 MB</td><td class="">0 Bytes</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 1489254"></div></div></td></tr><tr><td><span data-tooltip="National Commission for Employment Policy" data-placement="right">National Commission for Employment Policy</span></td><td>1.49 MB</td><td class="">0 Bytes</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 1489254"></div></div></td></tr><tr><td><span data-tooltip="Executive Office of the President" data-placement="right">EOP</span></td><td>100.61 KB</td><td class="">0 Bytes</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="100.61 KB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 100608"></div><div class="spark-bar" data-tooltip="100.61 KB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 100608"></div><div class="spark-bar" data-tooltip="100.61 KB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 100608"></div></div></td></tr><tr><td><span data-tooltip="Administrative Committee of the Federal Register" data-placement="right">ACFR</span></td><td>1.49 MB</td><td class="">0 Bytes</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 1489254"></div></div></td></tr><tr><td><span data-tooltip="National Commission on Military, National, and Public Service" data-placement="right">NCMNPS</span></td><td>1.49 MB</td><td class="">0 Bytes</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 1489254"></div></div></td></tr><tr><td><span data-tooltip="National Capital Planning Commission" data-placement="right">NCPC</span></td><td>1.49 MB</td><td class="">0 Bytes</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 1489254"></div></div></td></tr><tr><td><span data-tooltip="President&#39;s Commission on White House Fellowships" data-placement="right">President's Commission on White House Fellowships</span></td><td>1.49 MB</td><td class="">0 Bytes</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 1489254"></div><div class="spark-bar" data-tooltip="1.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 1489254"></div></div></td></tr><tr><td><span data-tooltip="Advisory Council on Historic Preservation" data-placement="right">ACHP</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="American Battle Monuments Commission" data-placement="right">ABMC</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="Architectural and Transportation Barriers Compliance Board" data-placement="right">ATBCB</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="Library of Congress" data-placement="right">LOC</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="Morris K. Udall and Stewart L. Udall Foundation" data-placement="right">Udall Foundation</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="Oklahoma City National Memorial Trust" data-placement="right">Oklahoma City National Memorial Trust</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="Pennsylvania Avenue Development Corporation" data-placement="right">Pennsylvania Avenue Development Corporation</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="Presidio Trust" data-placement="right">PT</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="Smithsonian Institution" data-placement="right">Smithsonian Institution</span></td><td>24.79 MB</td><td class="trend-down">12.46 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="24.82 MB" style="
+                        height: 99.28994744761324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 24817014"></div><div class="spark-bar" data-tooltip="24.99 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 24994488"></div><div class="spark-bar" data-tooltip="24.79 MB" style="
+                        height: 99.19840326395163%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 24794133"></div></div></td></tr><tr><td><span data-tooltip="Office of Director of National Intelligence" data-placement="right">ODNI</span></td><td>75.15 MB</td><td class="trend-down">16.83 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="75.18 MB" style="
+                        height: 99.60276125657816%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 75184476"></div><div class="spark-bar" data-tooltip="75.48 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 75484329"></div><div class="spark-bar" data-tooltip="75.15 MB" style="
+                        height: 99.56179381285882%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 75153552"></div></div></td></tr><tr><td><span data-tooltip="Peace Corps" data-placement="right">PC</span></td><td>28.86 MB</td><td class="trend-down">46.72 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="28.95 MB" style="
+                        height: 99.90302900288015%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 28947576"></div><div class="spark-bar" data-tooltip="28.98 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 28975674"></div><div class="spark-bar" data-tooltip="28.86 MB" style="
+                        height: 99.60681501317278%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 28861746"></div></div></td></tr><tr><td><span data-tooltip="Foreign Service Grievance Board" data-placement="right">FSGB</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="Foreign Service Impasse Disputes Panel" data-placement="right">Disputes Panel</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="Foreign Service Labor Relations Board" data-placement="right">FSLRB</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="United States Institute of Peace" data-placement="right">USIP</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="United States Section United States and Mexico International Boundary and Water Commission" data-placement="right">IBWC</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="United States International Development Cooperation Agency" data-placement="right">United States International Development Cooperation Agency</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="United States and Canada International Joint Commission" data-placement="right">IJC</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="Japan-United States Friendship Commission" data-placement="right">JUSFC</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="Millennium Challenge Corporation" data-placement="right">MCC</span></td><td>21.03 MB</td><td class="trend-down">62.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="21.15 MB" style="
+                        height: 99.44037220115564%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 21146910"></div><div class="spark-bar" data-tooltip="21.27 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 21265920"></div><div class="spark-bar" data-tooltip="21.03 MB" style="
+                        height: 98.90172162784398%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 21032361"></div></div></td></tr><tr><td><span data-tooltip="Delaware River Basin Commission" data-placement="right">DRBC</span></td><td>17.44 MB</td><td class="trend-down">103.67 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="17.63 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 17626467"></div><div class="spark-bar" data-tooltip="17.43 MB" style="
+                        height: 98.90090850310503%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 17432736"></div><div class="spark-bar" data-tooltip="17.44 MB" style="
+                        height: 98.91946015046578%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 17436006"></div></div></td></tr><tr><td><span data-tooltip="Susquehanna River Basin Commission" data-placement="right">SRBC</span></td><td>17.44 MB</td><td class="trend-down">103.67 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="17.63 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 17626467"></div><div class="spark-bar" data-tooltip="17.43 MB" style="
+                        height: 98.90090850310503%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 17432736"></div><div class="spark-bar" data-tooltip="17.44 MB" style="
+                        height: 98.91946015046578%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 17436006"></div></div></td></tr><tr><td><span data-tooltip="Water Resources Council" data-placement="right">Water Resources Council</span></td><td>17.44 MB</td><td class="trend-down">103.67 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="17.63 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 17626467"></div><div class="spark-bar" data-tooltip="17.43 MB" style="
+                        height: 98.90090850310503%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 17432736"></div><div class="spark-bar" data-tooltip="17.44 MB" style="
+                        height: 98.91946015046578%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 17436006"></div></div></td></tr><tr><td><span data-tooltip="Federal Communications Commission" data-placement="right">FCC</span></td><td>105.31 MB</td><td class="trend-down">148.79 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="105.58 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 105580575"></div><div class="spark-bar" data-tooltip="104.53 MB" style="
+                        height: 99.00302683519199%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 104527965"></div><div class="spark-bar" data-tooltip="105.31 MB" style="
+                        height: 99.74110862722617%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 105307236"></div></div></td></tr><tr><td><span data-tooltip="Construction Industry Collective Bargaining Commission" data-placement="right">Construction Industry Collective Bargaining Commission</span></td><td>87.62 MB</td><td class="trend-down">163.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="87.92 MB" style="
+                        height: 98.66231613912755%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 87916287"></div><div class="spark-bar" data-tooltip="89.11 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 89108274"></div><div class="spark-bar" data-tooltip="87.62 MB" style="
+                        height: 98.32554269876218%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 87616194"></div></div></td></tr><tr><td><span data-tooltip="National Railroad Adjustment Board" data-placement="right">National Railroad Adjustment Board</span></td><td>87.62 MB</td><td class="trend-down">163.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="87.92 MB" style="
+                        height: 98.66231613912755%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 87916287"></div><div class="spark-bar" data-tooltip="89.11 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 89108274"></div><div class="spark-bar" data-tooltip="87.62 MB" style="
+                        height: 98.32554269876218%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 87616194"></div></div></td></tr><tr><td><span data-tooltip="Occupational Safety and Health Review Commission" data-placement="right">OSHRC</span></td><td>87.62 MB</td><td class="trend-down">163.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="87.92 MB" style="
+                        height: 98.66231613912755%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 87916287"></div><div class="spark-bar" data-tooltip="89.11 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 89108274"></div><div class="spark-bar" data-tooltip="87.62 MB" style="
+                        height: 98.32554269876218%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 87616194"></div></div></td></tr><tr><td><span data-tooltip="Pension Benefit Guaranty Corporation" data-placement="right">PBGC</span></td><td>87.62 MB</td><td class="trend-down">163.35 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="87.92 MB" style="
+                        height: 98.66231613912755%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 87916287"></div><div class="spark-bar" data-tooltip="89.11 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 89108274"></div><div class="spark-bar" data-tooltip="87.62 MB" style="
+                        height: 98.32554269876218%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 87616194"></div></div></td></tr><tr><td><span data-tooltip="Central Intelligence Agency" data-placement="right">CIA</span></td><td>39.44 MB</td><td class="trend-down">250.15 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="39.9 MB" style="
+                        height: 99.59389258903022%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 39901083"></div><div class="spark-bar" data-tooltip="40.06 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 40063785"></div><div class="spark-bar" data-tooltip="39.44 MB" style="
+                        height: 98.44684919310545%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 39441534"></div></div></td></tr><tr><td><span data-tooltip="Office for Micronesian Status Negotiations" data-placement="right">Office for Micronesian Status Negotiations</span></td><td>39.44 MB</td><td class="trend-down">250.15 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="39.9 MB" style="
+                        height: 99.59389258903022%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 39901083"></div><div class="spark-bar" data-tooltip="40.06 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 40063785"></div><div class="spark-bar" data-tooltip="39.44 MB" style="
+                        height: 98.44684919310545%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 39441534"></div></div></td></tr><tr><td><span data-tooltip="National Counterintelligence Center" data-placement="right">NCTC</span></td><td>39.44 MB</td><td class="trend-down">250.15 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="39.9 MB" style="
+                        height: 99.59389258903022%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 39901083"></div><div class="spark-bar" data-tooltip="40.06 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 40063785"></div><div class="spark-bar" data-tooltip="39.44 MB" style="
+                        height: 98.44684919310545%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 39441534"></div></div></td></tr><tr><td><span data-tooltip="Selective Service System" data-placement="right">SSS</span></td><td>39.44 MB</td><td class="trend-down">250.15 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="39.9 MB" style="
+                        height: 99.59389258903022%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 39901083"></div><div class="spark-bar" data-tooltip="40.06 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 40063785"></div><div class="spark-bar" data-tooltip="39.44 MB" style="
+                        height: 98.44684919310545%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 39441534"></div></div></td></tr><tr><td><span data-tooltip="Office of Vice President of the United States" data-placement="right">Office of Vice President of the United States</span></td><td>39.44 MB</td><td class="trend-down">250.15 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="39.9 MB" style="
+                        height: 99.59389258903022%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 39901083"></div><div class="spark-bar" data-tooltip="40.06 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 40063785"></div><div class="spark-bar" data-tooltip="39.44 MB" style="
+                        height: 98.44684919310545%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 39441534"></div></div></td></tr><tr><td><span data-tooltip="First Responder Network Authority" data-placement="right">FirstNet</span></td><td>61.77 MB</td><td class="trend-down">397.74 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="62.5 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 62496516"></div><div class="spark-bar" data-tooltip="61.4 MB" style="
+                        height: 98.24174358775456%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 61397667"></div><div class="spark-bar" data-tooltip="61.77 MB" style="
+                        height: 98.83084202645792%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 61765833"></div></div></td></tr><tr><td><span data-tooltip="Social Security Administration" data-placement="right">SSA</span></td><td>119.82 MB</td><td class="trend-down">908.86 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="121.49 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 121492698"></div><div class="spark-bar" data-tooltip="121.49 MB" style="
+                        height: 99.99668868988324%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 121488675"></div><div class="spark-bar" data-tooltip="119.82 MB" style="
+                        height: 98.62570753017602%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 119823033"></div></div></td></tr><tr><td><span data-tooltip="Federal Maritime Commission" data-placement="right">FMC</span></td><td>49.28 MB</td><td class="trend-down">994.16 KB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="51.1 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 51102024"></div><div class="spark-bar" data-tooltip="50.67 MB" style="
+                        height: 99.16048530680507%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 50673015"></div><div class="spark-bar" data-tooltip="49.28 MB" style="
+                        height: 96.42604958269362%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 49275663"></div></div></td></tr><tr><td><span data-tooltip="Department of Energy" data-placement="right">DOE</span></td><td>190.75 MB</td><td class="trend-down">1.03 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="192.65 MB" style="
+                        height: 99.62897259660305%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 192651822"></div><div class="spark-bar" data-tooltip="193.37 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 193369275"></div><div class="spark-bar" data-tooltip="190.75 MB" style="
+                        height: 98.64770191644976%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 190754346"></div></div></td></tr><tr><td><span data-tooltip="Nuclear Regulatory Commission" data-placement="right">NRC</span></td><td>171.89 MB</td><td class="trend-down">1.07 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="173.86 MB" style="
+                        height: 99.60541213790495%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 173858694"></div><div class="spark-bar" data-tooltip="174.55 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 174547437"></div><div class="spark-bar" data-tooltip="171.89 MB" style="
+                        height: 98.47491372789392%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 171885438"></div></div></td></tr><tr><td><span data-tooltip="Joint Board for the Enrollment of Actuaries" data-placement="right">JBEA</span></td><td>44.95 MB</td><td class="trend-down">1.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="46.96 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 46959549"></div><div class="spark-bar" data-tooltip="46.77 MB" style="
+                        height: 99.59373119192435%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46768767"></div><div class="spark-bar" data-tooltip="44.95 MB" style="
+                        height: 95.71178590322492%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 44945823"></div></div></td></tr><tr><td><span data-tooltip="Railroad Retirement Board" data-placement="right">RRB</span></td><td>44.95 MB</td><td class="trend-down">1.1 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="46.96 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 46959549"></div><div class="spark-bar" data-tooltip="46.77 MB" style="
+                        height: 99.59373119192435%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 46768767"></div><div class="spark-bar" data-tooltip="44.95 MB" style="
+                        height: 95.71178590322492%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 44945823"></div></div></td></tr><tr><td><span data-tooltip="Department of Agriculture" data-placement="right">USDA</span></td><td>242.32 MB</td><td class="trend-down">1.22 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="244.55 MB" style="
+                        height: 99.88927466419385%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 244553643"></div><div class="spark-bar" data-tooltip="244.82 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 244824726"></div><div class="spark-bar" data-tooltip="242.32 MB" style="
+                        height: 98.97598823412959%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 242317692"></div></div></td></tr><tr><td><span data-tooltip="Defense Nuclear Facilities Safety Board" data-placement="right">DNFSB</span></td><td>61.3 MB</td><td class="trend-down">1.49 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="64.04 MB" style="
+                        height: 99.43355056908813%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 64042152"></div><div class="spark-bar" data-tooltip="64.41 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 64406985"></div><div class="spark-bar" data-tooltip="61.3 MB" style="
+                        height: 95.17012789839487%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 61296210"></div></div></td></tr><tr><td><span data-tooltip="Northeast Interstate Low-Level Radioactive Waste Commission" data-placement="right">Northeast Interstate Low-Level Radioactive Waste Commission</span></td><td>61.3 MB</td><td class="trend-down">1.49 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="64.04 MB" style="
+                        height: 99.43355056908813%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 64042152"></div><div class="spark-bar" data-tooltip="64.41 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 64406985"></div><div class="spark-bar" data-tooltip="61.3 MB" style="
+                        height: 95.17012789839487%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 61296210"></div></div></td></tr><tr><td><span data-tooltip="Nuclear Waste Technical Review Board" data-placement="right">NWTRB</span></td><td>61.3 MB</td><td class="trend-down">1.49 MB</td><td><div style="display: flex; align-items: flex-end; gap: 2px; height: 30px;"><div class="spark-bar" data-tooltip="64.04 MB" style="
+                        height: 99.43355056908813%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2023-11-26: 64042152"></div><div class="spark-bar" data-tooltip="64.41 MB" style="
+                        height: 100%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2024-11-26: 64406985"></div><div class="spark-bar" data-tooltip="61.3 MB" style="
+                        height: 95.17012789839487%;
+                        background-color: #55ff55;
+                        opacity: 0.8;
+                      " title="2025-09-27: 61296210"></div></div></td></tr></tbody></table></main></body></html>
